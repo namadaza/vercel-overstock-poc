@@ -11,6 +11,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@repo/ui": "workspace:*",
     "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^2.1.5",
     "clsx": "^2.1.1",
