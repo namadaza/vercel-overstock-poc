@@ -1,5 +1,5 @@
 {
-  "name": "ecom",
+  "name": "overstock",
   "private": true,
   "engines": {
     "node": ">=20",
