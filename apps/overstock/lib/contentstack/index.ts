@@ -1,18 +1,22 @@
 import * as Utils from "@contentstack/utils";
-import ContentstackLivePreview from "@contentstack/live-preview-utils";
 import { GetEntry, HeroOne2x1 } from "./types";
 import { initializeContentStackSdk } from "./utils";
+import { LivePreviewQuery } from "contentstack";
 
 // SDK initialization
 const Stack = initializeContentStackSdk();
 
-// Setting LivePreview if enabled
-ContentstackLivePreview.init({
-  stackSdk: Stack,
-});
-
 const renderOption = {
   span: (node: any, next: any) => next(node.children),
+};
+
+// Set live preview query params
+export const setLivePreviewQueryParams = (
+  queryParams: LivePreviewQuery | undefined,
+) => {
+  if (queryParams?.live_preview) {
+    Stack.livePreviewQuery(queryParams);
+  }
 };
 
 // fetches all the entries from specific content-type
