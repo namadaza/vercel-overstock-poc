@@ -1,9 +1,15 @@
-import { getHeaderOne2x1 } from "lib/contentstack";
+import { getHeaderOne2x1, setLivePreviewQueryParams } from "lib/contentstack";
 import Link from "next/link";
 import Image from "next/image";
+import { LivePreviewQuery } from "contentstack";
 
-export async function HeroOne2x1() {
+export async function HeroOne2x1({
+  searchParams,
+}: {
+  searchParams: LivePreviewQuery | undefined;
+}) {
   const heroItems = await getHeaderOne2x1();
+  setLivePreviewQueryParams(searchParams);
 
   const bannerDetails = heroItems?.[0]?.[0];
 

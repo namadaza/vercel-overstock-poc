@@ -1,7 +1,6 @@
 import { HeroOne2x1 } from "components/banners/hero-one-2x1";
 import Footer from "components/layout/footer";
 import { LivePreviewQuery } from "contentstack";
-import { setLivePreviewQueryParams } from "lib/contentstack";
 
 export const metadata = {
   description:
@@ -16,11 +15,9 @@ export default function HomePage({
 }: {
   searchParams: LivePreviewQuery | undefined;
 }) {
-  setLivePreviewQueryParams(searchParams);
-
   return (
     <>
-      <HeroOne2x1 />
+      <HeroOne2x1 searchParams={searchParams} />
       <Footer />
     </>
   );
