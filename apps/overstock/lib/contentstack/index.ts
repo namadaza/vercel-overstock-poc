@@ -1,9 +1,15 @@
 import * as Utils from "@contentstack/utils";
+import ContentstackLivePreview from "@contentstack/live-preview-utils";
 import { GetEntry, HeroOne2x1 } from "./types";
 import { initializeContentStackSdk } from "./utils";
 
 // SDK initialization
 const Stack = initializeContentStackSdk();
+
+// Setting LivePreview if enabled
+ContentstackLivePreview.init({
+  stackSdk: Stack,
+});
 
 const renderOption = {
   span: (node: any, next: any) => next(node.children),
