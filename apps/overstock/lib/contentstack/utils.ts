@@ -1,4 +1,4 @@
-import { Config, Stack } from "contentstack";
+import { Config, LivePreview, Stack } from "contentstack";
 
 /**
  
@@ -10,6 +10,8 @@ const {
   CONTENTSTACK_API_KEY,
   CONTENTSTACK_DELIVERY_TOKEN,
   CONTENTSTACK_ENVIRONMENT,
+  CONTENTSTACK_LIVE_PREVIEW,
+  CONTENTSTACK_PREVIEW_TOKEN,
 } = process.env;
 
 // basic env validation
@@ -21,6 +23,23 @@ export const isBasicConfigValid = () => {
   );
 };
 
+// Live preview config validation
+export const isLpConfigValid = () => {
+  return !!CONTENTSTACK_LIVE_PREVIEW && !!CONTENTSTACK_PREVIEW_TOKEN;
+};
+
+// set LivePreview config
+const setLivePreviewConfig = (): LivePreview => {
+  if (!isLpConfigValid())
+    throw new Error(
+      "Your LP config is set to true. Please make you have set all required LP config in .env",
+    );
+  return {
+    preview_token: CONTENTSTACK_PREVIEW_TOKEN as string,
+    enable: CONTENTSTACK_LIVE_PREVIEW === "true",
+  } as LivePreview;
+};
+
 // contentstack sdk initialization
 export const initializeContentStackSdk = (): Stack => {
   if (!isBasicConfigValid())
@@ -30,6 +49,9 @@ export const initializeContentStackSdk = (): Stack => {
     delivery_token: CONTENTSTACK_DELIVERY_TOKEN as string,
     environment: CONTENTSTACK_ENVIRONMENT as string,
   };
+  if (CONTENTSTACK_LIVE_PREVIEW === "true") {
+    stackConfig.live_preview = setLivePreviewConfig();
+  }
 
   return Stack(stackConfig);
 };
