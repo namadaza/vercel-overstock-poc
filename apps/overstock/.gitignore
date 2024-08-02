@@ -36,3 +36,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env*.local
+
+# playwright
+/test-results/
+/playwright-report/
+/results/
+/report/
+

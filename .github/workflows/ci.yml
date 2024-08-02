@@ -1,0 +1,95 @@
+name: E2E Tests for apps/web
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "apps/overstock/**"
+jobs:
+  test_setup:
+    name: Test Setup (Wait for Vercel Preview Deployment)
+    runs-on: ubuntu-latest
+    permissions:
+      deployments: read
+      pull-requests: read
+    outputs:
+      preview_url: ${{ steps.waitForVercelPreviewDeployment.outputs.url }}
+    steps:
+      # this allows to use action cache, which is not possible when using deployment_status otherwise
+      # see https://github.com/actions/cache/issues/319
+      - name: Wait for Vercel preview deployment to be ready
+        uses: ijjk/wait-for-vercel-preview@69026f436c048c1df50f7e3fafe8e2364077cd84
+        id: waitForVercelPreviewDeployment
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          vercel_bypass_token: ${{ secrets.DEPLOYMENT_PROTECTION_BYPASS }}
+          environment: "Preview – overstock"
+          max_timeout: 300
+          check_interval: 5
+  test:
+    name: Run E2E Tests
+    needs: test_setup
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+      TURBO_REMOTE_ONLY: "true"
+      DEPLOYMENT_PROTECTION_BYPASS: ${{ secrets.DEPLOYMENT_PROTECTION_BYPASS }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.4.0
+        with:
+          version: 8.2.0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/Hydrogen
+          cache: "pnpm"
+
+      - uses: actions/cache@v3
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      - name: Set up Vercel private registry
+        run: npm config set //vercel-private-registry.vercel.sh/:_authToken $VERCEL_TOKEN
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+      - name: Install Global Turbo
+        run: pnpm i -g turbo@latest
+
+      - name: Install dependencies
+        run: pnpm install
+
+      # This will use the cache for browsers. But it will reinstall system deps, which can't be cached
+      # https://github.com/microsoft/playwright/issues/20603#issuecomment-1416243810
+      # Using local ref so we are not subject to playwright surprise updates
+      - run: ./packages/web-tests/node_modules/.bin/playwright install --with-deps
+
+      - name: Run Playwright tests on ${{ needs.test_setup.outputs.preview_url }}
+        run: turbo e2e:test --only
+        env:
+          BASE_URL: ${{ needs.test_setup.outputs.preview_url }}
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Playwright Test Results
+          path: packages/web-tests/test-results
+          retention-days: 30
+
+      # - name: Upload Turbo Run Summary
+      #   if: always()
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: Turbo Run Summary
+      #     path: .turbo/runs/
+      #     retention-days: 30

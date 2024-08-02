@@ -1,10 +1,26 @@
 "use client";
-import { useEffect } from "react";
-import ContentstackLivePreview from "@contentstack/live-preview-utils";
+
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+
+const ContentstackLivePreviewSSR: any = dynamic(
+  (): any => import("@contentstack/live-preview-utils"),
+  { ssr: false },
+);
 
 export default function LivePreviewInitComponent() {
+  const [isMounted, setIsMounted] = useState(false);
+
   useEffect(() => {
-    ContentstackLivePreview.init({});
+    setIsMounted(true);
+    if (typeof ContentstackLivePreviewSSR.init === "function") {
+      ContentstackLivePreviewSSR.init({});
+    }
   }, []);
-  return <></>;
+
+  if (!isMounted) {
+    return null;
+  }
+
+  return null;
 }
