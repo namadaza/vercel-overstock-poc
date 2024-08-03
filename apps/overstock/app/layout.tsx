@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import { ReactNode } from "react";
 import "./globals.css";
 import LivePreviewInitComponent from "lib/contentstack/livePreviewInit";
-
+import { VercelToolbar } from "@vercel/toolbar/next";
 const { SITE_NAME } = process.env;
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
@@ -40,6 +40,7 @@ export default async function RootLayout({
         <CartProvider cartPromise={cart}>
           <Navbar />
           <main>{children}</main>
+          {<VercelToolbar />}
         </CartProvider>
       </body>
     </html>

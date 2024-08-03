@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
@@ -16,3 +16,5 @@ module.exports = {
     ],
   },
 };
+const withVercelToolbar = require("@vercel/toolbar/plugins/next")();
+module.exports = withVercelToolbar(nextConfig);
