@@ -13,14 +13,14 @@ export async function Navbar() {
   const menu = await getMenu('next-js-frontend-header-menu');
 
   return (
-    <nav className="relative flex items-center justify-between p-4 lg:px-6">
+    <nav className="bg-brand-red text-white relative flex items-center justify-between p-4 lg:px-6">
       <div className="block flex-none md:hidden">
         <Suspense fallback={null}>
           <MobileMenu menu={menu} />
         </Suspense>
       </div>
-      <div className="flex w-full items-center">
-        <div className="flex w-full md:w-1/3">
+      <div className="flex container mx-auto items-center">
+        <div className="flex w-full md:w-1/4">
           <Link
             href="/"
             prefetch={true}
@@ -47,12 +47,12 @@ export async function Navbar() {
             </ul>
           ) : null}
         </div>
-        <div className="hidden justify-center md:flex md:w-1/3">
+        <div className="hidden justify-center md:flex md:w-1/2">
           <Suspense fallback={<SearchSkeleton />}>
             <Search />
           </Suspense>
         </div>
-        <div className="flex justify-end md:w-1/3">
+        <div className="flex justify-end md:w-1/4">
           <CartModal />
         </div>
       </div>
