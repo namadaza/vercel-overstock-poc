@@ -1,5 +1,9 @@
-/** @type {import('next').NextConfig} */
-module.exports = {
+import type { NextConfig } from 'next';
+
+const config: NextConfig = {
+  experimental: {
+    ppr: true,
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
@@ -16,3 +20,5 @@ module.exports = {
     ],
   },
 };
+
+export default config
