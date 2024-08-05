@@ -5,6 +5,11 @@ const config: Config = {
   content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      animation: {
+        fadeIn: 'fadeIn .3s ease-in-out',
+        carousel: 'marquee 60s linear infinite',
+        blink: 'blink 1.4s both infinite'
+      },
       colors: {
         brand: {
           charcoal: '#252525',
@@ -30,11 +35,6 @@ const config: Config = {
           '100% ': { opacity: '0.2' }
         }
       },
-      animation: {
-        fadeIn: 'fadeIn .3s ease-in-out',
-        carousel: 'marquee 60s linear infinite',
-        blink: 'blink 1.4s both infinite'
-      }
     }
   },
   future: {

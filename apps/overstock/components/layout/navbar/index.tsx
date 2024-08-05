@@ -1,13 +1,11 @@
 import CartModal from 'components/cart/modal';
-import LogoSquare from 'components/logo-square';
+import Logo from 'components/logo';
 import { getMenu } from 'lib/shopify';
 import { Menu } from 'lib/shopify/types';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import MobileMenu from './mobile-menu';
 import Search, { SearchSkeleton } from './search';
-
-const { SITE_NAME } = process.env;
 
 export async function Navbar() {
   const menu = await getMenu('next-js-frontend-header-menu');
@@ -26,10 +24,7 @@ export async function Navbar() {
             prefetch={true}
             className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6"
           >
-            <LogoSquare />
-            <div className="ml-2 flex-none text-sm font-medium uppercase md:hidden lg:block">
-              {SITE_NAME}
-            </div>
+            <Logo className='text-white h-10 w-auto' />
           </Link>
           {menu.length ? (
             <ul className="hidden gap-6 text-sm md:flex md:items-center">
