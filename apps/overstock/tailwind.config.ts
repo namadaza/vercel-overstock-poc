@@ -7,7 +7,9 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          red: 'rgb(217, 0, 35)'
+          charcoal: '#252525',
+          pink: '#ff576a',
+          red: 'rgb(217, 0, 35)',
         }
       },
       fontFamily: {
