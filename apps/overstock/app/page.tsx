@@ -1,3 +1,5 @@
+import { HeroFive4x1 } from "components/banners/hero-five-4x1";
+import { HeroFour3x1 } from "components/banners/hero-four-3x1";
 import { HeroOne2x1 } from "components/banners/hero-one-2x1";
 import { HeroThree1x1 } from "components/banners/hero-three-1x1";
 import { HeroTwo3x1 } from "components/banners/hero-two-3x1";
@@ -22,6 +24,8 @@ export default function HomePage({
       <HeroOne2x1 searchParams={searchParams} />
       <HeroTwo3x1 searchParams={searchParams} />
       <HeroThree1x1 searchParams={searchParams} />
+      <HeroFour3x1 searchParams={searchParams} />
+      <HeroFive4x1 searchParams={searchParams} />
       <Footer />
     </>
   );

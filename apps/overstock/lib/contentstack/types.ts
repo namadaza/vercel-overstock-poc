@@ -4,7 +4,7 @@ export type GetEntry = {
   jsonRtePath: string[] | undefined;
 };
 
-export type HeroOne2x1 = {
+export type HeroMods = {
   left_content_link: {
     title: string;
     href: string;
@@ -13,24 +13,19 @@ export type HeroOne2x1 = {
     title: string;
     href: string;
   };
-  right_content_link: {
+  left_center_content_link: {
     title: string;
     href: string;
   };
-  right_image_url: {
+  left_center_image_url: {
     title: string;
     href: string;
   };
-  tags: string[];
-  title: string;
-};
-
-export type HeroTwo3x1 = {
-  left_content_link: {
+  right_center_content_link: {
     title: string;
     href: string;
   };
-  left_image_url: {
+  right_center_image_url: {
     title: string;
     href: string;
   };
@@ -50,11 +45,6 @@ export type HeroTwo3x1 = {
     title: string;
     href: string;
   };
-  tags: string[];
-  title: string;
-};
-
-export type HeroThree1x1 = {
   content_link: {
     title: string;
     href: string;
