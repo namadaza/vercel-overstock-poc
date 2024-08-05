@@ -150,9 +150,6 @@ importers:
       '@turbo/gen':
         specifier: 2.0.11
         version: 2.0.11(@types/node@22.1.0)(typescript@5.3.3)
-      '@types/eslint':
-        specifier: 8.56.5
-        version: 8.56.5
       '@types/node':
         specifier: 22.1.0
         version: 22.1.0
@@ -676,12 +673,6 @@ packages:
   '@turbo/workspaces@2.0.11':
     resolution: {integrity: sha512-/S1Q5lAGya+hKWO/iabN7a0vbXQwDac6am9r/CSmKbxvRwRVB2hNzcqLIx+xKmIj0N8GCK028CbgYOY3+SWXAw==}
     hasBin: true
-
-  '@types/eslint@8.56.5':
-    resolution: {integrity: sha512-u5/YPJHo1tvkSF2CE0USEkxon82Z5DBy2xR+qfyYNszpX9qcs4sT6uq2kBbj4BXY1+DBGDPnrhMZV3pKWGNukw==}
-
-  '@types/estree@1.0.5':
-    resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
 
   '@types/glob@7.2.0':
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
@@ -3908,13 +3899,6 @@ snapshots:
       rimraf: 3.0.2
       semver: 7.5.4
       update-check: 1.5.4
-
-  '@types/eslint@8.56.5':
-    dependencies:
-      '@types/estree': 1.0.5
-      '@types/json-schema': 7.0.12
-
-  '@types/estree@1.0.5': {}
 
   '@types/glob@7.2.0':
     dependencies:
