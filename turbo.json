@@ -12,7 +12,11 @@
     "CONTENTSTACK_DELIVERY_TOKEN",
     "CONTENTSTACK_ENVIRONMENT",
     "CONTENTSTACK_LIVE_PREVIEW",
-    "CONTENTSTACK_PREVIEW_TOKEN"
+    "CONTENTSTACK_PREVIEW_TOKEN",
+    "BASE_URL",
+    "PORT",
+    "VERCEL_AUTOMATION_BYPASS_SECRET",
+    "DEPLOYMENT_PROTECTION_BYPASS"
   ],
   "tasks": {
     "build": {
@@ -22,6 +26,9 @@
     },
     "lint": {
       "dependsOn": ["^lint"]
+    },
+    "e2e:test": {
+      "dependsOn": ["^build"]
     },
     "dev": {
       "cache": false,
