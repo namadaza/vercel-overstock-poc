@@ -1,3 +1,4 @@
+import FeaturedDeals from "components/featured-deals";
 import Slider from "components/slider";
 import type { LivePreviewQuery } from "contentstack";
 import { getHomePage } from "lib/contentstack";
@@ -22,6 +23,7 @@ export default async function HomePage({
   {homePage.sections.map(({ section }: any) => {
     return <div className={`${section.is_screen_width ? '' : 'container mx-auto px-4 lg:px-6'} py-4 gap-4 grid grid-cols-1`} key={section._metadata.uid}>
       {!!section.title && <h2 className="text-[36px]/[48px] font-bold">{section.title}</h2>}
+      {section.is_featured_deals && <FeaturedDeals />}
       {section.has_slider && <Slider desktopColumns={section.desktop_columns} mobileColumns={section.mobile_columns} viewport={section.slider_type}>
         {(section.cards ?? []).map(({ card }: { card: any }) => {
           return <Link href={card.url} key={card._metadata.uid}>
