@@ -29,7 +29,7 @@ export async function HeroThree1x1({
           <Image
             src={banner.imgUrl}
             alt={""}
-            width={600}
+            width={1400}
             height={300}
             className="w-full h-auto object-cover hidden sm:block"
           />
