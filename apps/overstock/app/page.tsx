@@ -138,7 +138,7 @@ const featuredBrandsTestData: CategoryType[] = [
       sizes: "(min-width: 1748px) calc((1620px - 72px) / 4), (min-width: 1280px) calc((100vw - 200px) / 4), (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 600px) calc((100vw - 88px) / 2), calc(100vw - 40px)",
       alt: ""
   },
-  title: "Category Rug",
+  title: "Rug",
   url: "/collections/rugs",
   _metadata: {
       uid: ''
@@ -151,7 +151,7 @@ const featuredBrandsTestData: CategoryType[] = [
         sizes: "(min-width: 1748px) calc((1620px - 72px) / 4), (min-width: 1280px) calc((100vw - 200px) / 4), (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 600px) calc((100vw - 88px) / 2), calc(100vw - 40px)",
         alt: ""
     },
-    title: "Category Jewelry",
+    title: "Jewelry",
     url: "/collections/jewelry-watches",
     _metadata: {
       uid: ''
@@ -164,7 +164,7 @@ const featuredBrandsTestData: CategoryType[] = [
       sizes: "(min-width: 1748px) calc((1620px - 72px) / 4), (min-width: 1280px) calc((100vw - 200px) / 4), (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 600px) calc((100vw - 88px) / 2), calc(100vw - 40px)",
       alt: ""
   },
-  title: "Category Furniture",
+  title: "Furniture",
   url: "/collections/top-furniture-deals",
   _metadata: {
     uid: ''
@@ -177,7 +177,7 @@ const featuredBrandsTestData: CategoryType[] = [
       sizes: "(min-width: 1748px) calc((1620px - 72px) / 4), (min-width: 1280px) calc((100vw - 200px) / 4), (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 600px) calc((100vw - 88px) / 2), calc(100vw - 40px)",
       alt: ""
   },
-  title: "Category Outdoor",
+  title: "Outdoor",
   url: "/collections/top-outdoor-deals",
   _metadata: {
     uid: ''
@@ -203,7 +203,7 @@ export default async function HomePage({
         </Slider>}
       {section.has_slider && !section.title.toLowerCase().includes('category') && <Slider desktopColumns={section.desktop_columns} mobileColumns={section.mobile_columns} viewport={section.slider_type}>
         {(section.cards ?? []).map(({ card }: { card: CategoryType }, idx: number) => {
-          return <Category key={card._metadata?.uid ?? `card-${idx}`} category={card.image?.src ? card : featuredBrandsTestData[idx] as CategoryType} />
+          return <Category beefy key={card._metadata?.uid ?? `card-${idx}`} category={card.image?.src ? card : featuredBrandsTestData[idx] as CategoryType} />
         })}
       </Slider>}
       {!section.has_slider && <div className="w-full md:flex gap-4">{(section.cards ?? []).map(({ card }: { card: any }) => {
