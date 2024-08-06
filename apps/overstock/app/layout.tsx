@@ -1,4 +1,5 @@
 import { CartProvider } from "components/cart/cart-context";
+import Footer from "components/layout/footer";
 import { Navbar } from "components/layout/navbar";
 import LivePreviewInitComponent from "lib/contentstack/livePreviewInit";
 import { getCart } from "lib/shopify";
@@ -39,6 +40,7 @@ export default async function RootLayout({
         <CartProvider cartPromise={cart}>
           <Navbar />
           <main>{children}</main>
+          <Footer />
         </CartProvider>
       </body>
     </html>

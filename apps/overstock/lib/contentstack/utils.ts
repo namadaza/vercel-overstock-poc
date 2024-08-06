@@ -1,4 +1,4 @@
-import { Config, LivePreview, Stack } from "contentstack";
+import { type Config, type LivePreview, Stack } from "contentstack";
 
 /**
  
