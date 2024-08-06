@@ -7,10 +7,51 @@ import { Suspense } from 'react';
 import MobileMenu from './mobile-menu';
 import Search, { SearchSkeleton } from './search';
 
+const preNavItems = [
+  {
+    href: 'https://beyond.com/',
+    title: 'Beyond, Inc.'
+  },
+  {
+    href: 'https://bedbathandbeyond.com/',
+    title: 'Bed Bath & Beyond',
+  },
+  {
+    href: 'https://babyandbeyond.com/',
+    title: 'Baby & Beyond',
+  },
+  {
+    href: 'https://kidsandbeyond.com',
+    title: 'Kids & Beyond',
+  },
+  {
+    href: 'https://zulilly.com',
+    title: 'Zulilly',
+  },
+  {
+    href: 'https://collegeliving.com',
+    title: 'College Living',
+  },
+  {
+    href: 'https://studio4beyond.com',
+    title: 'Studio4 Beyond',
+  },
+  {
+    href: 'https://backyard.com',
+    title: 'Backyard',
+  }
+]
+
 export async function Navbar() {
   const menu = await getMenu('next-js-frontend-header-menu');
 
   return (
+    <>
+    <menu className='text-center divide-x divide-neutral-300 text-xs py-2'>
+      {preNavItems.map((item, index) => {
+        return <Link className='px-3' key={index} href={item.href} target='_blank'>{item.title}</Link>
+      })}
+    </menu>
     <nav className="bg-brand-red text-white flex items-center justify-between py-4 sticky z-40 top-0">
       <div className="block flex-none md:hidden pl-4">
         <Suspense fallback={null}>
@@ -52,5 +93,6 @@ export async function Navbar() {
         </div>
       </div>
     </nav>
+    </>
   );
 }

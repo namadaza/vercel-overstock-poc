@@ -34,7 +34,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className="bg-white text-black">
+      <body className="bg-white text-black antialiased">
         <LivePreviewInitComponent />
         <CartProvider cartPromise={cart}>
           <Navbar />
