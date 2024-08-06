@@ -35,6 +35,9 @@ const config: Config = {
           '100% ': { opacity: '0.2' }
         }
       },
+      screens: {
+        '2xl': '1432px',
+      }
     }
   },
   future: {
@@ -42,7 +45,6 @@ const config: Config = {
   },
   plugins: [
     require('@tailwindcss/container-queries'),
-    require('@tailwindcss/typography'),
     plugin(({ matchUtilities, theme }) => {
       matchUtilities(
         {
