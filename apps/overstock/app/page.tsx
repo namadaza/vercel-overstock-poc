@@ -1,12 +1,12 @@
-import { HeroOne2x1 } from "components/banners/hero-one-2x1";
 import Category, { CategoryType } from "components/category";
-import Footer from "components/layout/footer";
 import Slider from "components/slider";
-import { LivePreviewQuery } from "contentstack";
+import type { LivePreviewQuery } from "contentstack";
+import { getHomePage } from "lib/contentstack";
+import Link from "next/link";
 
 export const metadata = {
   description:
-    "High-performance ecommerce store built with Next.js, Vercel, and Shopify.",
+    "Crazy-Good Deals",
   openGraph: {
     type: "website",
   },
@@ -20,8 +20,8 @@ const testData: CategoryType[] = [
       sizes: "(min-width: 1748px) calc((1620px - 72px) / 4), (min-width: 1280px) calc((100vw - 200px) / 4), (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 600px) calc((100vw - 88px) / 2), calc(100vw - 40px)",
       alt: "Furniture"
     },
-    "title": "Furniture",
-    "link": "/collections/furniture"
+    title: "Furniture",
+    url: "/collections/furniture"
   },
   {
     "image": {
@@ -30,8 +30,8 @@ const testData: CategoryType[] = [
       sizes: "(min-width: 1748px) calc((1620px - 72px) / 4), (min-width: 1280px) calc((100vw - 200px) / 4), (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 600px) calc((100vw - 88px) / 2), calc(100vw - 40px)",
       alt: "Outdoor"
     },
-    "title": "Outdoor",
-    "link": "/collections/outdoor"
+    title: "Outdoor",
+    url: "/collections/outdoor"
   },
   {
     image : {
@@ -41,8 +41,8 @@ const testData: CategoryType[] = [
       alt : "Rugs",
     },
     
-    "title": "Rugs",
-    "link": "/collections/rugs"
+    title: "Rugs",
+    url: "/collections/rugs"
   },
   {
     image : {
@@ -52,8 +52,8 @@ const testData: CategoryType[] = [
       alt : "Home Decor",
     },
     
-    "title": "Home Decor",
-    "link": "/collections/home-decor"
+    title: "Home Decor",
+    url: "/collections/home-decor"
   },
   {
     image : {
@@ -62,8 +62,8 @@ const testData: CategoryType[] = [
       sizes : "(min-width: 1748px) calc((1620px - 72px) / 4), (min-width: 1280px) calc((100vw - 200px) / 4), (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 600px) calc((100vw - 88px) / 2), calc(100vw - 40px)",
       alt : "Jewelry",
     },    
-    "title": "Jewelry",
-    "link": "/collections/jewelry-watches"
+    title: "Jewelry",
+    url: "/collections/jewelry-watches"
   },
   {
     image : {
@@ -73,8 +73,8 @@ const testData: CategoryType[] = [
       alt : "",
     },
     
-    "title": "Home Improvement",
-    "link": "/collections/home-improvement"
+    title: "Home Improvement",
+    url: "/collections/home-improvement"
   },
   {
     image : {
@@ -84,8 +84,8 @@ const testData: CategoryType[] = [
       alt : "Lighting",
     },
     
-    "title": "Lighting",
-    "link": "/collections/lighting"
+    title: "Lighting",
+    url: "/collections/lighting"
   },
   {
     image : {
@@ -94,8 +94,8 @@ const testData: CategoryType[] = [
       sizes : "(min-width: 1748px) calc((1620px - 72px) / 4), (min-width: 1280px) calc((100vw - 200px) / 4), (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 600px) calc((100vw - 88px) / 2), calc(100vw - 40px)",
       alt : "Clothing And Shoes",
     },    
-    "title": "Clothing And Shoes",
-    "link": "/collections/clothing-shoes"
+    title: "Clothing And Shoes",
+    url: "/collections/clothing-shoes"
   },
   {
     image : {
@@ -105,8 +105,8 @@ const testData: CategoryType[] = [
       alt : "Storage And Organization",
     },
     
-    "title": "Storage And Organization",
-    "link": "/collections/storage-organization"
+    title: "Storage And Organization",
+    url: "/collections/storage-organization"
   },
   {
     image : {
@@ -115,8 +115,8 @@ const testData: CategoryType[] = [
       sizes : "(min-width: 1748px) calc((1620px - 72px) / 4), (min-width: 1280px) calc((100vw - 200px) / 4), (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 600px) calc((100vw - 88px) / 2), calc(100vw - 40px)",
       alt : "Bedding",
     },    
-    "title": "Bedding",
-    "link": "/collections/bedding"
+    title: "Bedding",
+    url: "/collections/bedding"
   },
   {
     image : {
@@ -125,77 +125,42 @@ const testData: CategoryType[] = [
       sizes : "(min-width: 1748px) calc((1620px - 72px) / 4), (min-width: 1280px) calc((100vw - 200px) / 4), (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 600px) calc((100vw - 88px) / 2), calc(100vw - 40px)",
       alt : "Bath",
     },    
-    "title": "Bath",
-    "link": "/collections/bath"
+    title: "Bath",
+    url: "/collections/bath"
   },
 ]
 
-export default function HomePage({
+export default async function HomePage({
   searchParams,
 }: {
   searchParams: LivePreviewQuery | undefined;
 }) {
-  return (
-    <>
-      <HeroOne2x1 searchParams={searchParams} />
-      <div className="container mx-auto py-4 px-4 lg:px-6">
-        <div className="grid gap-4 md:grid-cols-3 w-full">
-          <div>
-            <div className="aspect-square bg-black w-full" />
-          </div>
-          <div>
-            <div className="aspect-square bg-black w-full" />
-          </div>
-          <div>
-            <div className="aspect-square bg-black w-full" />
-          </div>
-        </div>
-      </div>
-      <div className="py-4 w-full">
-        <div className="w-full aspect-[5/1] bg-black" />
-      </div>
-      <div className="container mx-auto py-4 px-4 lg:px-6">
-      <h2 className="text-[36px]/[48px] font-bold">Featured Deals</h2>
-      </div>
-      <div className="container mx-auto py-4 px-4 lg:px-6">
-        <div className="grid gap-4 md:grid-cols-3 w-full">
-        <div className="col-span-full"><h2 className="text-[36px]/[48px] font-bold">Discover Brands You{"'"}ll Love</h2></div>
-          <div>
-            <div className="aspect-[9/5] bg-black w-full" />
-          </div>
-          <div>
-          <div className="aspect-[9/5] bg-black w-full" />
-          </div>
-          <div>
-          <div className="aspect-[9/5] bg-black w-full" />
-          </div>
-        </div>
-      </div>
-      <div className="container mx-auto py-4 px-4 lg:px-6">
-        <div className="grid gap-4 md:grid-cols-4 w-full">
-          <div>
-            <div className="aspect-square bg-black w-full" />
-          </div>
-          <div>
-            <div className="aspect-square bg-black w-full" />
-          </div>
-          <div>
-            <div className="aspect-square bg-black w-full" />
-          </div>
-          <div>
-            <div className="aspect-square bg-black w-full" />
-          </div>
-        </div>
-      </div>
-      <div className="container mx-auto py-4 px-4 lg:px-6 gap-4 grid grid-cols-1">
-        <h2 className="text-[36px]/[48px] font-bold">Shop By Category</h2>
-        <Slider>
-          {testData.map((category: CategoryType, idx: number) => (
-            <Category key={`category-${idx}`} category={category} />
-          ))}
-        </Slider>
-      </div>
-      <Footer />
-    </>
-  );
+  const homePage = await getHomePage()
+
+  return <>
+  {homePage.sections.map(({ section }: any) => {
+    return <div className={`${section.is_screen_width ? '' : 'container mx-auto px-4 lg:px-6'} py-4 gap-4 grid grid-cols-1`} key={section._metadata.uid}>
+      {!!section.title && <h2 className="text-[36px]/[48px] font-bold">{section.title}</h2>}
+      {section.title.toLowerCase().includes('category') && <Slider desktopColumns={section.desktop_columns} mobileColumns={section.mobile_columns} viewport={section.slider_type}>
+      {(testData).map((card: CategoryType, idx: number) => {
+          return <Category key={`category-${idx}`} category={card} />
+        })}
+        </Slider>}
+      {section.has_slider && !section.title.toLowerCase().includes('category') && <Slider desktopColumns={section.desktop_columns} mobileColumns={section.mobile_columns} viewport={section.slider_type}>
+        {(section.cards ?? []).map(({ card }: { card: any }) => {
+          return <Link href={card.url} key={card._metadata.uid}>
+            <div className="w-full aspect-[3/1] bg-black mb-4" />
+            {card.title}
+            </Link>
+        })}
+      </Slider>}
+      {!section.has_slider && <div className="w-full md:flex gap-4">{(section.cards ?? []).map(({ card }: { card: any }) => {
+          return <Link className="md:flex-1" href={card.url} key={card._metadata.uid}>
+            <div className="w-full bg-black aspect-[5/1] mb-4" />
+          </Link>
+        })}
+        </div>}
+    </div>
+  })}
+  </>
 }

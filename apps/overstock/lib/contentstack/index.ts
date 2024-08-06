@@ -1,7 +1,7 @@
 import * as Utils from "@contentstack/utils";
+import { LivePreviewQuery } from "contentstack";
 import { GetEntry, HeroOne2x1 } from "./types";
 import { initializeContentStackSdk } from "./utils";
-import { LivePreviewQuery } from "contentstack";
 
 // SDK initialization
 const Stack = initializeContentStackSdk();
@@ -56,4 +56,14 @@ export const getHeaderOne2x1 = async (): Promise<HeroOne2x1[][]> => {
   })) as unknown as HeroOne2x1[][];
 
   return heroOne2x1Entry;
+};
+
+export const getHomePage = async (): Promise<any> => {
+  const homePage = (await getEntry({
+    contentTypeUid: "home_page",
+    referenceFieldPath: undefined,
+    jsonRtePath: undefined,
+  })) as any;
+
+  return homePage[0][0];
 };
