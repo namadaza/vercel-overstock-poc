@@ -47,9 +47,9 @@ export async function Navbar() {
 
   return (
     <>
-    <menu className='text-center divide-x divide-neutral-300 text-xs py-2'>
+    <menu className='scrollbar-none flex justify-center divide-x divide-neutral-300 text-xs py-2 overflow-x-auto'>
       {preNavItems.map((item, index) => {
-        return <Link className='px-3' key={index} href={item.href} target='_blank'>{item.title}</Link>
+        return <Link className='px-3 shrink-0' key={index} href={item.href} target='_blank'>{item.title}</Link>
       })}
     </menu>
     <nav className="bg-brand-red text-white flex items-center justify-between py-4 sticky z-40 top-0">

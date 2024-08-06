@@ -149,8 +149,8 @@ export default async function HomePage({
       {section.has_slider && !section.title.toLowerCase().includes('category') && <Slider desktopColumns={section.desktop_columns} mobileColumns={section.mobile_columns} viewport={section.slider_type}>
         {(section.cards ?? []).map(({ card }: { card: any }) => {
           return <Link href={card.url} key={card._metadata.uid}>
-            <div className="w-full aspect-[3/1] bg-black mb-4" />
-            {card.title}
+            <div className="w-full aspect-square bg-black mb-4" />
+            {!!card.title && <span>{card.title}</span>}
             </Link>
         })}
       </Slider>}
