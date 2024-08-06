@@ -130,6 +130,61 @@ const testData: CategoryType[] = [
   },
 ]
 
+const featuredBrandsTestData: CategoryType[] = [
+  {
+    image: {
+      src: "//checkout.overstock.com/cdn/shop/files/06272024-MOPS-Category-Rug.png?v=1719612969&width=460",
+      srcset: "//checkout.overstock.com/cdn/shop/files/06272024-MOPS-Category-Rug.png?v=1719612969&width=320 320w, //checkout.overstock.com/cdn/shop/files/06272024-MOPS-Category-Rug.png?v=1719612969&width=460 460w, //checkout.overstock.com/cdn/shop/files/06272024-MOPS-Category-Rug.png?v=1719612969&width=600 600w",
+      sizes: "(min-width: 1748px) calc((1620px - 72px) / 4), (min-width: 1280px) calc((100vw - 200px) / 4), (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 600px) calc((100vw - 88px) / 2), calc(100vw - 40px)",
+      alt: ""
+  },
+  title: "Category Rug",
+  link: "/collections/rugs",
+  _metadata: {
+      uid: ''
+  }
+  },
+  {
+    image: {
+        src: "//checkout.overstock.com/cdn/shop/files/06272024-MOPS-Category-Jewelry.png?v=1719612969&width=460",
+        srcset: "//checkout.overstock.com/cdn/shop/files/06272024-MOPS-Category-Jewelry.png?v=1719612969&width=320 320w, //checkout.overstock.com/cdn/shop/files/06272024-MOPS-Category-Jewelry.png?v=1719612969&width=460 460w, //checkout.overstock.com/cdn/shop/files/06272024-MOPS-Category-Jewelry.png?v=1719612969&width=600 600w",
+        sizes: "(min-width: 1748px) calc((1620px - 72px) / 4), (min-width: 1280px) calc((100vw - 200px) / 4), (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 600px) calc((100vw - 88px) / 2), calc(100vw - 40px)",
+        alt: ""
+    },
+    title: "Category Jewelry",
+    link: "/collections/jewelry-watches",
+    _metadata: {
+      uid: ''
+  }
+},
+ {
+  image: {
+      src: "//checkout.overstock.com/cdn/shop/files/06272024-MOPS-Category-Furniture.png?v=1719612969&width=460",
+      srcset: "//checkout.overstock.com/cdn/shop/files/06272024-MOPS-Category-Furniture.png?v=1719612969&width=320 320w, //checkout.overstock.com/cdn/shop/files/06272024-MOPS-Category-Furniture.png?v=1719612969&width=460 460w, //checkout.overstock.com/cdn/shop/files/06272024-MOPS-Category-Furniture.png?v=1719612969&width=600 600w",
+      sizes: "(min-width: 1748px) calc((1620px - 72px) / 4), (min-width: 1280px) calc((100vw - 200px) / 4), (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 600px) calc((100vw - 88px) / 2), calc(100vw - 40px)",
+      alt: ""
+  },
+  title: "Category Furniture",
+  link: "/collections/top-furniture-deals",
+  _metadata: {
+    uid: ''
+}
+},
+{
+  image: {
+      src: "//checkout.overstock.com/cdn/shop/files/06272024-MOPS-Category-Outdoor.png?v=1719612969&width=460",
+      srcset: "//checkout.overstock.com/cdn/shop/files/06272024-MOPS-Category-Outdoor.png?v=1719612969&width=320 320w, //checkout.overstock.com/cdn/shop/files/06272024-MOPS-Category-Outdoor.png?v=1719612969&width=460 460w, //checkout.overstock.com/cdn/shop/files/06272024-MOPS-Category-Outdoor.png?v=1719612969&width=600 600w",
+      sizes: "(min-width: 1748px) calc((1620px - 72px) / 4), (min-width: 1280px) calc((100vw - 200px) / 4), (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 600px) calc((100vw - 88px) / 2), calc(100vw - 40px)",
+      alt: ""
+  },
+  title: "Category Outdoor",
+  link: "/collections/top-outdoor-deals",
+  _metadata: {
+    uid: ''
+}
+}
+]
+
 export default async function HomePage({
   searchParams,
 }: {
@@ -142,16 +197,13 @@ export default async function HomePage({
     return <div className={`${section.is_screen_width ? '' : 'container mx-auto px-4 lg:px-6'} py-4 gap-4 grid grid-cols-1`} key={section._metadata.uid}>
       {!!section.title && <h2 className="text-[36px]/[48px] font-bold">{section.title}</h2>}
       {section.title.toLowerCase().includes('category') && <Slider desktopColumns={section.desktop_columns} mobileColumns={section.mobile_columns} viewport={section.slider_type}>
-      {(testData).map((card: CategoryType, idx: number) => {
+      {testData.map((card: CategoryType, idx: number) => {
           return <Category key={`category-${idx}`} category={card} />
         })}
         </Slider>}
       {section.has_slider && !section.title.toLowerCase().includes('category') && <Slider desktopColumns={section.desktop_columns} mobileColumns={section.mobile_columns} viewport={section.slider_type}>
-        {(section.cards ?? []).map(({ card }: { card: any }) => {
-          return <Link href={card.url} key={card._metadata.uid}>
-            <div className="w-full aspect-square bg-black mb-4" />
-            {!!card.title && <span>{card.title}</span>}
-            </Link>
+        {(section.cards ?? []).map(({ card }: { card: CategoryType }, idx: number) => {
+          return <Category key={card._metadata?.uid ?? `card-${idx}`} category={card.image?.src ? card : featuredBrandsTestData[idx]} />
         })}
       </Slider>}
       {!section.has_slider && <div className="w-full md:flex gap-4">{(section.cards ?? []).map(({ card }: { card: any }) => {

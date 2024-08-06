@@ -11,13 +11,17 @@ export type CategoryType = {
     };
     title: string;
     url: string;
+    _metadata?: {
+        uid: string
+    }
   }
 
 const Category = ({ category }: { category: CategoryType }) => {
+
   return (
     <Link className="flex flex-col items-center text-center justify-start h-full" href={`https://www.overstock.com${category.url}`}>
         <div className="w-32 h-32 rounded-full overflow-hidden">
-            <img className="w-full h-full object-cover" src={category.image.src} />
+            <img className="w-full h-full object-cover" src={category.image?.src} />
         </div>
         <div className="mt-4 pb-2 font-bold">{category.title}</div>
         <div className="flex flex-row"><span className="mr-2">Shop now</span><ArrowRightCircleIcon  /></div>
