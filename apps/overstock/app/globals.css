@@ -2,10 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.scrollbar-none {
+  @apply [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
 }
 
 @supports (font: -apple-system-body) and (-webkit-appearance: none) {

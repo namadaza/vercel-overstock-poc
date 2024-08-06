@@ -44,7 +44,7 @@ export default async function Footer() {
   return (
     <>
     <div className="w-full bg-brand-pink text-white py-6">
-      <div className="container mx-auto grid grid-cols-4 gap-8 px-4 lg:px-6 text-sm">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-4 lg:px-6 text-sm">
         {footerProps.map((prop, index) => {
           return <Link className="my-auto flex gap-4" href={prop.href} key={index}>
             <svg aria-hidden={true} className="h-12 w-12 text-white shrink-0 my-auto" dangerouslySetInnerHTML={{ __html: prop.icon }} focusable={false} height={48} role="presentation" viewBox="0 0 16 16" width={48} />

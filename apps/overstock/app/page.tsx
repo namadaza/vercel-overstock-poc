@@ -1,5 +1,6 @@
 import { HeroOne2x1 } from "components/banners/hero-one-2x1";
 import Footer from "components/layout/footer";
+import Slider from "components/slider";
 import { LivePreviewQuery } from "contentstack";
 
 export const metadata = {
@@ -67,8 +68,34 @@ export default function HomePage({
           </div>
         </div>
       </div>
-      <div className="container mx-auto py-4 px-4 lg:px-6">
+      <div className="container mx-auto py-4 px-4 lg:px-6 gap-4 grid grid-cols-1">
         <h2 className="text-[36px]/[48px] font-bold">Shop By Category</h2>
+        <Slider>
+          <div>
+            <div className="bg-black w-full aspect-square rounded-full" />
+          </div>
+          <div>
+            <div className="bg-black w-full aspect-square rounded-full" />
+          </div>
+          <div>
+            <div className="bg-black w-full aspect-square rounded-full" />
+          </div>
+          <div>
+            <div className="bg-black w-full aspect-square rounded-full" />
+          </div>
+          <div>
+            <div className="bg-black w-full aspect-square rounded-full" />
+          </div>
+          <div>
+            <div className="bg-black w-full aspect-square rounded-full" />
+          </div>
+          <div>
+            <div className="bg-black w-full aspect-square rounded-full" />
+          </div>
+          <div>
+            <div className="bg-black w-full aspect-square rounded-full" />
+          </div>
+        </Slider>
       </div>
       <Footer />
     </>
