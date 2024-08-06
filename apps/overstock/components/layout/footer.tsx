@@ -57,11 +57,13 @@ export default async function Footer() {
       </div>
     </div>
     <div className="w-full bg-brand-charcoal text-white py-6">
-      <div className="container mx-auto grid grid-cols-6 gap-4 px-4 lg:px-6">
-<div className="col-span-4 col-start-2 grid md:grid-cols-5 gap-4">
-        <div className="text-2xl/[1.3] font-bold md:col-span-3">
-        Get an additional 15% off your first order +
-        the craziest deals, straight to your inbox.
+      <div className="container mx-auto grid md:grid-cols-6 gap-4 px-4 md:px-6">
+<div className="md:col-span-4 md:col-start-2 grid md:grid-cols-5 gap-4">
+        <div className="text-md text-center md:text-left md:text-2xl/[1.3] font-bold md:col-span-3">
+        <ul>
+          <li>Get an additional 15% off your first order +</li>
+          <li>the craziest deals, straight to your inbox.</li>
+        </ul>
         </div>
         <div className="flex md:col-span-2">
           <div className="p-2 bg-white h-12 my-auto w-full" />
