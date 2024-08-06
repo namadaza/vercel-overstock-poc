@@ -1,7 +1,7 @@
-import { getHeaderOne2x1, setLivePreviewQueryParams } from "lib/contentstack";
-import Link from "next/link";
-import Image from "next/image";
 import { LivePreviewQuery } from "contentstack";
+import { getHeaderOne2x1, setLivePreviewQueryParams } from "lib/contentstack";
+import Image from "next/image";
+import Link from "next/link";
 
 export async function HeroOne2x1({
   searchParams,
@@ -25,7 +25,7 @@ export async function HeroOne2x1({
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="container mx-auto py-4 px-4 lg:px-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Link href={leftBanner.linkUrl} className="block w-full">
           <Image
