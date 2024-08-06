@@ -203,7 +203,7 @@ export default async function HomePage({
         </Slider>}
       {section.has_slider && !section.title.toLowerCase().includes('category') && <Slider desktopColumns={section.desktop_columns} mobileColumns={section.mobile_columns} viewport={section.slider_type}>
         {(section.cards ?? []).map(({ card }: { card: CategoryType }, idx: number) => {
-          return <Category key={card._metadata?.uid ?? `card-${idx}`} category={!card.image?.src ? card : featuredBrandsTestData[idx] as CategoryType} />
+          return <Category key={card._metadata?.uid ?? `card-${idx}`} category={card.image?.src ? card : featuredBrandsTestData[idx] as CategoryType} />
         })}
       </Slider>}
       {!section.has_slider && <div className="w-full md:flex gap-4">{(section.cards ?? []).map(({ card }: { card: any }) => {
