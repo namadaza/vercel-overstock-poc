@@ -1,7 +1,7 @@
 import * as Utils from "@contentstack/utils";
+import { LivePreviewQuery } from "contentstack";
 import { GetEntry, HeroOne2x1 } from "./types";
 import { initializeContentStackSdk } from "./utils";
-import { LivePreviewQuery } from "contentstack";
 
 // SDK initialization
 const Stack = initializeContentStackSdk();
@@ -48,7 +48,7 @@ const getEntry = ({
   });
 };
 
-export const getHeaderOne2x1 = async (): Promise<HeroOne2x1[][]> => {
+export const getHeroOne2x1 = async (): Promise<HeroOne2x1[][]> => {
   const heroOne2x1Entry = (await getEntry({
     contentTypeUid: "hero_1_2x1",
     referenceFieldPath: undefined,
@@ -57,3 +57,15 @@ export const getHeaderOne2x1 = async (): Promise<HeroOne2x1[][]> => {
 
   return heroOne2x1Entry;
 };
+
+export const getHeaderTopNav = async (): Promise<any> => {
+  const heroOne2x1Entry = (await getEntry({
+    contentTypeUid: "header_top_nav",
+    referenceFieldPath: undefined,
+    jsonRtePath: undefined,
+  }));
+
+  return heroOne2x1Entry;
+};
+
+
