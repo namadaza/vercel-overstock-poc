@@ -23,7 +23,7 @@ export async function HeroThree1x1({
 
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-4">
       <div className="grid grid-cols-1 gap-4">
         <Link href={banner.linkUrl} className="block w-full">
           <Image

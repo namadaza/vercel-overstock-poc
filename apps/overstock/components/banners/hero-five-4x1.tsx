@@ -33,7 +33,7 @@ export async function HeroFive4x1({
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
+    <div className="container mx-auto py-4 px-4 lg:px-6">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Link href={leftBanner.linkUrl} className="block w-full">
           <Image
