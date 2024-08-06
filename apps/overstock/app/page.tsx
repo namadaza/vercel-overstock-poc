@@ -139,7 +139,7 @@ const featuredBrandsTestData: CategoryType[] = [
       alt: ""
   },
   title: "Category Rug",
-  link: "/collections/rugs",
+  url: "/collections/rugs",
   _metadata: {
       uid: ''
   }
@@ -152,7 +152,7 @@ const featuredBrandsTestData: CategoryType[] = [
         alt: ""
     },
     title: "Category Jewelry",
-    link: "/collections/jewelry-watches",
+    url: "/collections/jewelry-watches",
     _metadata: {
       uid: ''
   }
@@ -165,7 +165,7 @@ const featuredBrandsTestData: CategoryType[] = [
       alt: ""
   },
   title: "Category Furniture",
-  link: "/collections/top-furniture-deals",
+  url: "/collections/top-furniture-deals",
   _metadata: {
     uid: ''
 }
@@ -178,7 +178,7 @@ const featuredBrandsTestData: CategoryType[] = [
       alt: ""
   },
   title: "Category Outdoor",
-  link: "/collections/top-outdoor-deals",
+  url: "/collections/top-outdoor-deals",
   _metadata: {
     uid: ''
 }
@@ -203,7 +203,7 @@ export default async function HomePage({
         </Slider>}
       {section.has_slider && !section.title.toLowerCase().includes('category') && <Slider desktopColumns={section.desktop_columns} mobileColumns={section.mobile_columns} viewport={section.slider_type}>
         {(section.cards ?? []).map(({ card }: { card: CategoryType }, idx: number) => {
-          return <Category key={card._metadata?.uid ?? `card-${idx}`} category={card.image?.src ? card : featuredBrandsTestData[idx]} />
+          return <Category key={card._metadata?.uid ?? `card-${idx}`} category={!card.image?.src ? card : featuredBrandsTestData[idx] as CategoryType} />
         })}
       </Slider>}
       {!section.has_slider && <div className="w-full md:flex gap-4">{(section.cards ?? []).map(({ card }: { card: any }) => {
