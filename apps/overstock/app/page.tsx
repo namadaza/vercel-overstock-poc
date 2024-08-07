@@ -209,7 +209,7 @@ export default async function HomePage({
           return <Category beefy key={card._metadata?.uid ?? `card-${idx}`} category={card.image?.src ? card : featuredBrandsTestData[idx] as CategoryType} />
         })}
       </Slider>}
-      {!section.has_slider && <div className="w-full md:flex gap-4">{(section.cards ?? []).map(({ card }: { card: any }) => {
+      {!section.has_slider && <div className="w-full flex-col md:flex-row flex gap-4">{(section.cards ?? []).map(({ card }: { card: any }) => {
           return <Link className="md:flex-1" href={card.url} key={card._metadata.uid}>
             {!!card.image &&
             <Image alt="Hello World" className="block w-full h-auto" height={card.image.dimension.height} src={card.image.url} width={card.image.dimension.width} unoptimized />}
