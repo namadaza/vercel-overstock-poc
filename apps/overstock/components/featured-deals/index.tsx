@@ -25,7 +25,7 @@ async function Render() {
 
           return (
             <Link
-              className="border p-2 h-full"
+              className="bg-white border p-2 h-full"
               href={`https://www.overstock.com/products/${product.handle}`}
               key={product.id}
               prefetch={false}
@@ -65,7 +65,7 @@ async function Render() {
                   )}
                 </li>
                 <li className="line-clamp-2">{product.title}</li>
-                <li id={`pr-reviewsnippet-${id}`} data-product-id={id}></li>
+                <li className="w-full h-[25px]" id={`pr-reviewsnippet-${id}`} data-product-id={id}></li>
                 <Script id={`card-${product.id}-reviews`} strategy="lazyOnload">{`
                 function loadReviews() {
                   window.pwr = window.pwr || function () {

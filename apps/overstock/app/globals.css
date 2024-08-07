@@ -7,7 +7,7 @@
 }
 
 @supports (font: -apple-system-body) and (-webkit-appearance: none) {
-  img[loading='lazy'] {
+  img[loading="lazy"] {
     clip-path: inset(0.6px);
   }
 }
@@ -16,4 +16,68 @@ a,
 input,
 button {
   @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-neutral-600 dark:focus-visible:ring-offset-neutral-900;
+}
+
+[id^="pr-category-snippets"]
+  > div
+  > div.pr-category-snippet__rating.pr-category-snippet__item
+  > div
+  > div.pr-snippet-rating-decimal {
+  display: none;
+}
+
+[id^="pr-category-snippets"]
+  > div
+  > div.pr-category-snippet__rating.pr-category-snippet__item
+  > div
+  > div.pr-rating-stars
+  > div.pr-star-v4.pr-star-v4-100-filled {
+  height: 15px;
+  width: 15px;
+  background-image: url(https://ak1.ostkcdn.com/img/mxc/star-full.svg);
+}
+
+[id^="pr-category-snippets"]
+  > div
+  > div.pr-category-snippet__rating.pr-category-snippet__item
+  > div
+  > div.pr-rating-stars
+  > div.pr-star-v4.pr-star-v4-50-filled {
+  height: 15px;
+  width: 15px;
+  background-image: url(https://ak1.ostkcdn.com/img/mxc/star-half.svg);
+}
+
+[id^="pr-category-snippets"]
+  > div
+  > div.pr-category-snippet__rating.pr-category-snippet__item
+  > div
+  > div.pr-rating-stars
+  > div.pr-star-v4.pr-star-v4-25-filled {
+  height: 15px;
+  width: 15px;
+  background-image: url(https://ak1.ostkcdn.com/img/mxc/star-25.svg);
+}
+
+[id^="pr-category-snippets"]
+  > div
+  > div.pr-category-snippet__rating.pr-category-snippet__item
+  > div
+  > div.pr-rating-stars
+  > div.pr-star-v4.pr-star-v4-0-filled {
+  height: 15px;
+  width: 15px;
+  background-image: url(https://ak1.ostkcdn.com/img/mxc/star-empty.svg);
+}
+
+[id^="pr-category-snippets"]
+  .pr-category-snippet__total.pr-category-snippet__item {
+  color: #626669;
+  font-size: 14px;
+  line-height: 1;
+  vertical-align: bottom;
+}
+
+.p-w-r .pr-snippet.pr-category-snippet {
+  margin: 0;
 }
