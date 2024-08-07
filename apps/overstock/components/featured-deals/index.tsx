@@ -2,12 +2,15 @@ import Slider from "components/slider";
 import { getProducts } from "lib/shopify";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import { Suspense } from "react";
 
 async function Render() {
   const date = new Date();
   // date.toISOString().split('T')[0]
-  const products = await getProducts({ query: "SAFAVIEH" });
+  const products = await getProducts({
+    reverse: true,
+  });
 
   const use = products
     .filter((product) => !!product.images[0]?.url)
@@ -18,8 +21,15 @@ async function Render() {
       {/* <pre>{JSON.stringify(use, null, 2)}</pre> */}
       <Slider desktopColumns={6} mobileColumns={1.5} viewport="both">
         {use.map((product) => {
+            const id = product.handle.split('-').pop()
+
           return (
-            <Link className="border p-2 h-full" href={`https://www.overstock.com/products/${product.handle}`} key={product.id} prefetch={false}>
+            <Link
+              className="border p-2 h-full"
+              href={`https://www.overstock.com/products/${product.handle}`}
+              key={product.id}
+              prefetch={false}
+            >
               {!!product.images[0]?.url && (
                 <div className="w-full aspect-square relative mb-4">
                   <Image
@@ -55,7 +65,56 @@ async function Render() {
                   )}
                 </li>
                 <li className="line-clamp-2">{product.title}</li>
-                {/* <li className="text-sm">★★★★★ 666</li> */}
+                <li id={`pr-reviewsnippet-${id}`} data-product-id={id}></li>
+                <Script id={`card-${product.id}-reviews`} strategy="lazyOnload">{`
+                function loadReviews() {
+                  window.pwr = window.pwr || function () {
+                    (pwr.q = pwr.q || []).push(arguments);
+                  };
+                  pwr("render", {
+                    api_key: "0ce15d13-67ca-47dd-8c72-1d5e4694ada3",
+                    locale: "en",
+                    merchant_group_id: "1939031562",
+                    merchant_id: "1280018588",
+                    page_id: "${id}",
+                    on_render: function(config, data) {
+                        console.log(data);
+                    },
+                    components: {
+                      CategorySnippet: "pr-reviewsnippet-${id}"
+                    }
+                  });
+                }
+              
+                function observeReviews() {
+                  const targetNode = document.getElementById("pr-reviewsnippet-${id}");
+              
+                  const config = { childList: true, subtree: true };
+              
+                  const callback = function(mutationsList, observer) {
+                    for (const mutation of mutationsList) {
+                      if (mutation.type === 'childList') {
+                        mutation.addedNodes.forEach(node => {
+                          if (node.nodeType === Node.ELEMENT_NODE) {
+                            // Remove the word "reviews" from the newly added content
+                            node.innerHTML = node.innerHTML.replace(/No Reviews/gi, '0');
+                            node.innerHTML = node.innerHTML.replace(/reviews/gi, '');
+                            node.innerHTML = node.innerHTML.replace(/review/gi, '');
+                          }
+                        });
+                      }
+                    }
+                  };
+              
+                  const observer = new MutationObserver(callback);
+                  observer.observe(targetNode, config);
+                }
+                
+                loadReviews();
+                observeReviews();
+                
+                new Promise((r) => setTimeout(r, 5000)).then(() => {});
+              `}</Script>
               </ul>
             </Link>
           );

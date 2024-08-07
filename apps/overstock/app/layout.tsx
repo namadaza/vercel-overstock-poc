@@ -4,7 +4,8 @@ import { Navbar } from "components/layout/navbar";
 import LivePreviewInitComponent from "lib/contentstack/livePreviewInit";
 import { getCart } from "lib/shopify";
 import { cookies } from "next/headers";
-import { ReactNode } from "react";
+import Script from "next/script";
+import type { ReactNode } from "react";
 import "./globals.css";
 
 const { SITE_NAME } = process.env;
@@ -42,6 +43,7 @@ export default async function RootLayout({
           <main>{children}</main>
           <Footer />
         </CartProvider>
+        <Script src="https://ui.powerreviews.com/stable/4.1/ui.js" strategy="lazyOnload" />
       </body>
     </html>
   );
