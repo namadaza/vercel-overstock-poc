@@ -26,7 +26,7 @@ const getEntry = ({
   jsonRtePath,
 }: GetEntry) => {
   return new Promise((resolve, reject) => {
-    const query = Stack.ContentType(contentTypeUid).Query();
+    const query = Stack.ContentType(contentTypeUid).Query().addParam('include_dimension', 'true');
     if (referenceFieldPath) query.includeReference(referenceFieldPath);
     query
       .toJSON()
@@ -48,7 +48,7 @@ const getEntry = ({
   });
 };
 
-export const getHeroOne2x1 = async (): Promise<HeroOne2x1[][]> => {
+export const getHeaderOne2x1 = async (): Promise<HeroOne2x1[][]> => {
   const heroOne2x1Entry = (await getEntry({
     contentTypeUid: "hero_1_2x1",
     referenceFieldPath: undefined,
@@ -69,3 +69,12 @@ export const getHeaderTopNav = async (): Promise<any> => {
 };
 
 
+export const getHomePage = async (): Promise<any> => {
+  const homePage = (await getEntry({
+    contentTypeUid: "home_page",
+    referenceFieldPath: undefined,
+    jsonRtePath: undefined,
+  })) as any;
+
+  return homePage[0][0];
+};
