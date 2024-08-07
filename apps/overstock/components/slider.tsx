@@ -9,7 +9,7 @@ function Slider({ children, desktopColumns = 6, mobileColumns = 2.5, viewport = 
         '--mobile-column-width': `calc((100% - ${(mobileColumns - 1) * 16}px) / ${mobileColumns})`
     } as CSSProperties}>{children}</div>
     <div className={`scrollbar-none hidden md:flex gap-4 ${isDesktop ? '*:w-[var(--desktop-column-width)] *:snap-start snap-mandatory snap-x overflow-x-auto overscroll-x-none' : '*:flex-1'} *:shrink-0`} style={{
-        '--desktop-column-width': `calc((100% - ${(desktopColumns - 1) * 16}px) / ${desktopColumns})`
+        '--desktop-column-width': `calc((100% - ${(desktopColumns - 1) * 16}px) / ${desktopColumns - 1})`
     } as CSSProperties}>{children}</div>
     </>
 }
