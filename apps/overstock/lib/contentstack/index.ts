@@ -26,7 +26,7 @@ const getEntry = ({
   jsonRtePath,
 }: GetEntry) => {
   return new Promise((resolve, reject) => {
-    const query = Stack.ContentType(contentTypeUid).Query();
+    const query = Stack.ContentType(contentTypeUid).Query().addParam('include_dimension', 'true');
     if (referenceFieldPath) query.includeReference(referenceFieldPath);
     query
       .toJSON()

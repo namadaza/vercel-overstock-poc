@@ -1,6 +1,7 @@
 import Slider from "components/slider";
 import type { LivePreviewQuery } from "contentstack";
 import { getHomePage } from "lib/contentstack";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
@@ -20,7 +21,7 @@ export default async function HomePage({
 
   return <>
   {homePage.sections.map(({ section }: any) => {
-    return <div className={`${section.is_screen_width ? '' : 'container mx-auto px-4 lg:px-6'} py-4 gap-4 grid grid-cols-1`} key={section._metadata.uid}>
+    return <div className={`${section.is_screen_width ? 'w-full' : 'container mx-auto px-4 lg:px-6'} py-4 gap-4 grid grid-cols-1`} key={section._metadata.uid}>
       {!!section.title && <h2 className="text-[36px]/[48px] font-bold">{section.title}</h2>}
       {section.has_slider && <Slider desktopColumns={section.desktop_columns} mobileColumns={section.mobile_columns} viewport={section.slider_type}>
         {(section.cards ?? []).map(({ card }: { card: any }) => {
@@ -32,7 +33,9 @@ export default async function HomePage({
       </Slider>}
       {!section.has_slider && <div className="w-full md:flex gap-4">{(section.cards ?? []).map(({ card }: { card: any }) => {
           return <Link className="md:flex-1" href={card.url} key={card._metadata.uid}>
-            <div className="w-full bg-black aspect-[5/1] mb-4" />
+            {!!card.image &&
+            <Image alt="Hello World" className="block w-full h-auto" height={card.image.dimension.height} src={card.image.url} width={card.image.dimension.width} unoptimized />}
+            {!card.image && <div className="w-full bg-black aspect-[5/1]" />}
           </Link>
         })}
         </div>}
