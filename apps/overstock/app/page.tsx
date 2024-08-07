@@ -193,9 +193,9 @@ export default async function HomePage({
 }) {
   const homePage = await getHomePage()
 
-  return <>
+  return <div className="grid grid-cols-1 gap-y-12 py-12">
   {homePage.sections.map(({ section }: any) => {
-    return <div className={`${section.is_screen_width ? 'w-full' : 'container mx-auto px-4 lg:px-6'} py-4 gap-4 grid grid-cols-1`} key={section._metadata.uid}>
+    return <div className={`${section.is_screen_width ? 'w-full' : 'container mx-auto px-4 lg:px-6'} gap-4 grid grid-cols-1`} key={section._metadata.uid}>
       {!!section.title && <h2 className="text-[36px]/[48px] font-bold">{section.title}</h2>}
       {section.title.toLowerCase().includes('category') && <Slider desktopColumns={section.desktop_columns} mobileColumns={section.mobile_columns} viewport={section.slider_type}>
       {testData.map((card: CategoryType, idx: number) => {
@@ -217,5 +217,5 @@ export default async function HomePage({
         </div>}
     </div>
   })}
-  </>
+  </div>
 }
