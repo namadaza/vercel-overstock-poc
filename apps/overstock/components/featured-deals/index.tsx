@@ -19,6 +19,9 @@ async function Render() {
     <Slider desktopColumns={5} mobileColumns={1.5} viewport="both">
       {products.map((product) => {
         const id = product.handle.split("-").pop();
+        const referencePricing = JSON.parse(
+          product.variants[0]?.referencePricing?.value ?? "{}"
+        );
 
         return (
           <Link
@@ -50,6 +53,22 @@ async function Render() {
               </div>
             )}
             <ul>
+              {Object.keys(referencePricing).length > 0 && (
+                <li className="text-sm font-bold">
+                  <span className="border-b border-black border-dashed line-through">
+                    {Number(referencePricing.MSRP.price).toLocaleString(
+                      "en-US",
+                      {
+                        currency: "USD",
+                        maximumFractionDigits: 2,
+                        minimumFractionDigits: 2,
+                        style: "currency",
+                      }
+                    )}
+                  </span>{" "}
+                  {referencePricing.MSRP.sellingPercentageOff}% Off MSRP
+                </li>
+              )}
               <li className="mb-1 text-lg font-bold">
                 {Number(product.variants[0]?.price.amount).toLocaleString(
                   "en-US",
