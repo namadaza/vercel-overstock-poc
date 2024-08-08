@@ -5,8 +5,8 @@ function Slider({ children, desktopColumns = 6, mobileColumns = 2.5, viewport = 
     const isMobile = viewport === 'mobile' || viewport === 'both'
 
     return <>
-    <div className={`w-[calc(100%+32px)] px-4 md:px-0 md:scroll-ml-0 -mx-4 md:-mx-0 scrollbar-none flex gap-4 md:w-auto *:shrink-0 ${isMobile ? '*:scroll-ml-4 *:w-[var(--mobile-column-width)] overflow-x-auto overscroll-x-none *:snap-start snap-x' : ''} ${isDesktop ? '*:md:w-[var(--desktop-column-width)] *:md:snap-start md:snap-mandatory md:snap-x md:overflow-x-auto md:overscroll-x-none' : '*:md:flex-1'}`} style={{
-        '--desktop-column-width': `calc((100% - ${(desktopColumns - 2) * 16}px) / ${desktopColumns - 1})`,
+    <div className={`w-[calc(100%+32px)] px-4 md:px-0 md:scroll-ml-0 -mx-4 md:-mx-0 scrollbar-none flex gap-4 md:w-auto *:shrink-0 ${isMobile ? '*:scroll-ml-4 *:w-[var(--mobile-column-width)] overflow-x-auto overscroll-x-none *:snap-start snap-x' : ''} ${isDesktop ? '*:md:w-[var(--desktop-column-width)] *:md:snap-start md:snap-mandatory md:snap-x md:overflow-x-auto md:overscroll-x-none md:*:scroll-ml-0' : '*:md:flex-1'}`} style={{
+        '--desktop-column-width': `calc((100% - ${(desktopColumns - 1) * 16}px) / ${desktopColumns})`,
         '--mobile-column-width': `calc((100% - ${(mobileColumns - 1) * 16}px) / ${mobileColumns})`,
     } as CSSProperties}>{children}</div>
     </>

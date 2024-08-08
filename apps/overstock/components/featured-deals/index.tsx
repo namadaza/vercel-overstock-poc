@@ -19,7 +19,7 @@ async function Render() {
   return (
     <>
       {/* <pre>{JSON.stringify(use, null, 2)}</pre> */}
-      <Slider desktopColumns={6} mobileColumns={1.5} viewport="both">
+      <Slider desktopColumns={5} mobileColumns={1.5} viewport="both">
         {use.map((product) => {
             const id = product.handle.split('-').pop()
 
