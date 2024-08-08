@@ -8,12 +8,12 @@ function FooterForm() {
           <li>the craziest deals, straight to your inbox.</li>
         </ul>
       </div>
-      <div className="flex md:col-span-2">
-        <form method="post" action="/contact#contact_form" id="contact_form">
+      <div className="md:col-span-2 my-auto">
+        <form action="/contact#contact_form" className="grid grid-cols-2 p-2 bg-white" id="contact_form" method="post">
           <input type="hidden" name="form_type" value="customer" />
           <input type="hidden" name="utf8" value="✓" />
           <input type="hidden" name="contact[tags]" value="newsletter" />
-          <input className="text-black" type="email"
+          <input className="text-black h-8 px-2 leading-8 appearance-none" type="email"
                   pattern=".+@.+\.(.+\.?)+"
                   name="contact[email]"
                   id="form-newsletter-email-sections--16857002213535__promo_strip_Mtn9DA"
@@ -22,10 +22,10 @@ function FooterForm() {
                   autoCapitalize="off"
                   autoComplete="email"
                   required />
-          <button type="submit">Submit</button>
+          <button className="bg-brand-red w-full leading-8 h-8 font-bold" type="submit">Sign up for emails</button>
         </form>
-        <div className="hidden form-status newsletter-form-success" tabIndex={-1} autoFocus>
-                  <h5 className="newsletter-form-success-title form-status-title">Thanks for subscribing</h5>
+        <div className="hidden form-status newsletter-form-success text-center pt-2" tabIndex={-1} autoFocus>
+                  <h5 className="text-xl font-bold newsletter-form-success-title form-status-title">Thanks for subscribing</h5>
                 </div>
       </div>
     </>

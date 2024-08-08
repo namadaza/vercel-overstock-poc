@@ -68,7 +68,7 @@ function AppScripts() {
                 setTimeout(() => {
                   formStatusSuccess.style.display = 'none';
                   location.reload();
-                }, 5000);
+                }, 2000);
               }
             }
           );
