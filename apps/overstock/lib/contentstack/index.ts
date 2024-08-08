@@ -59,13 +59,13 @@ export const getHeaderOne2x1 = async (): Promise<HeroOne2x1[][]> => {
 };
 
 export const getHeaderTopNav = async (): Promise<any> => {
-  const heroOne2x1Entry = (await getEntry({
+  const headerTopNav = (await getEntry({
     contentTypeUid: "header_top_nav",
     referenceFieldPath: undefined,
     jsonRtePath: undefined,
-  }));
+  })) as any;
 
-  return heroOne2x1Entry;
+  return headerTopNav[0][0];
 };
 
 

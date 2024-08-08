@@ -13,6 +13,7 @@ const config: Config = {
       colors: {
         brand: {
           charcoal: '#252525',
+          grey: 'rgb(37, 37, 37)',
           pink: '#ff576a',
           red: 'rgb(217, 0, 35)',
         }

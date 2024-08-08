@@ -24,3 +24,25 @@ export type HeroOne2x1 = {
   tags: string[];
   title: string;
 };
+
+export type HeaderTopNav = {
+  level_one: LevelOne[];
+};
+
+export type LevelOne = NavLevel & {
+  level_two: LevelTwo[];
+};
+
+export type LevelTwo = NavLevel &{
+  level_three: NavLevel[];
+};
+
+export type NavLevel = {
+  tid: string;
+  link: Link;
+}
+
+type Link = {
+  title: string;
+  href: string;
+}

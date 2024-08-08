@@ -6,6 +6,7 @@ import { Suspense } from 'react';
 import DesktopMenu from './desktop-menu';
 import MobileMenu from './mobile-menu';
 import Search, { SearchSkeleton } from './search';
+import { getHeaderTopNav } from 'lib/contentstack';
 
 const preNavItems = [
   {
@@ -53,7 +54,7 @@ export async function Navbar() {
         return <Link className='px-3 shrink-0' key={index} href={item.href} target='_blank'>{item.title}</Link>
       })}
     </menu>
-    <nav className="bg-brand-red text-white flex items-center justify-between py-4 sticky z-40 top-0">
+    <nav className="bg-brand-red text-white flex flex-col items-center justify-between py-4 pb-0 sticky z-40 top-0">
       <div className="block flex-none md:hidden pl-4">
         <Suspense fallback={null}>
           <MobileMenu menu={menu} />
