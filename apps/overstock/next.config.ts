@@ -17,6 +17,11 @@ const config: NextConfig = {
         hostname: "checkout.overstock.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.contentstack.io",
+        pathname: '/v3/assets/**',
+      }
     ],
   },
 };
