@@ -51,8 +51,8 @@ export type CategoryType = {
 const Category = ({ category }: { category: CategoryType }) => {
 
   return (
-    <Link className="flex flex-col items-center text-center justify-start h-full" href={`https://www.overstock.com${category.url}`}>
-        <div className={`rounded-full overflow-hidden`}>
+    <Link className="flex flex-col items-center text-center justify-start h-full" href={category.url}>
+        <div className={`rounded-full w-full aspect-square overflow-hidden`}>
             <Image 
                 alt={category.title} 
                 className="w-full h-full object-cover" 
