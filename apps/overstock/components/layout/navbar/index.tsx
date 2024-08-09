@@ -1,11 +1,12 @@
 import CartModal from 'components/cart/modal';
 import Logo from 'components/logo';
 import { getMenu } from 'lib/shopify';
-import { Menu } from 'lib/shopify/types';
 import Link from 'next/link';
 import { Suspense } from 'react';
+import DesktopMenu from './desktop-menu';
 import MobileMenu from './mobile-menu';
 import Search, { SearchSkeleton } from './search';
+import { getHeaderTopNav } from 'lib/contentstack';
 
 const preNavItems = [
   {
@@ -44,6 +45,7 @@ const preNavItems = [
 
 export async function Navbar() {
   const menu = await getMenu('next-js-frontend-header-menu');
+  const topNav = await getHeaderTopNav();
 
   return (
     <>
@@ -52,7 +54,7 @@ export async function Navbar() {
         return <Link className='px-3 shrink-0' key={index} href={item.href} target='_blank'>{item.title}</Link>
       })}
     </menu>
-    <nav className="bg-brand-red text-white flex items-center justify-between py-4 sticky z-40 top-0">
+    <nav className="bg-brand-red text-white flex flex-col items-center justify-between py-4 pb-0 sticky z-40 top-0">
       <div className="block flex-none md:hidden pl-4">
         <Suspense fallback={null}>
           <MobileMenu menu={menu} />
@@ -67,21 +69,6 @@ export async function Navbar() {
           >
             <Logo className='text-white h-10 w-auto' />
           </Link>
-          {menu.length ? (
-            <ul className="hidden gap-6 text-sm md:flex md:items-center">
-              {menu.map((item: Menu) => (
-                <li key={item.title}>
-                  <Link
-                    href={item.path}
-                    prefetch={true}
-                    className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
-                  >
-                    {item.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : null}
         </div>
         <div className="hidden justify-center md:flex md:w-1/2">
           <Suspense fallback={<SearchSkeleton />}>
@@ -92,6 +79,9 @@ export async function Navbar() {
           <CartModal />
         </div>
       </div>
+      <Suspense fallback={null}>
+        <DesktopMenu topNav={topNav} />
+      </Suspense>
     </nav>
     </>
   );
