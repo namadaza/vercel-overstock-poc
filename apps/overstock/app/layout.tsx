@@ -1,4 +1,5 @@
 import AppScripts from "components/app-scripts";
+import AppStylesheets from "components/app-stylesheets";
 import { CartProvider } from "components/cart/cart-context";
 import Footer from "components/layout/footer";
 import { Navbar } from "components/layout/navbar";
@@ -44,6 +45,7 @@ export default async function RootLayout({
           <Footer />
         </CartProvider>
         <AppScripts />
+        <AppStylesheets />
       </body>
     </html>
   );
