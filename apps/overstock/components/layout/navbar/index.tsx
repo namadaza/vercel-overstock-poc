@@ -54,12 +54,7 @@ export async function Navbar() {
         return <Link className='px-3 shrink-0' key={index} href={item.href} target='_blank'>{item.title}</Link>
       })}
     </menu>
-    <nav className="bg-brand-red text-white flex flex-col items-center justify-between py-4 pb-0 sticky z-40 top-0">
-      <div className="block flex-none md:hidden pl-4">
-        <Suspense fallback={null}>
-          <MobileMenu menu={menu} />
-        </Suspense>
-      </div>
+    <nav className="bg-brand-red text-white border-b-white border-b-[1px] flex flex-col items-center justify-between py-4 md:pb-0 sticky z-40 top-0">
       <div className="flex container mx-auto items-center px-4 lg:px-6">
         <div className="flex w-full md:w-1/4">
           <Link
@@ -77,6 +72,11 @@ export async function Navbar() {
         </div>
         <div className="flex justify-end md:w-1/4">
           <CartModal />
+          </div>
+          <div className="block flex-none md:hidden pl-4">
+          <Suspense fallback={null}>
+            <MobileMenu topNav={topNav} />
+          </Suspense>
         </div>
       </div>
       <Suspense fallback={null}>

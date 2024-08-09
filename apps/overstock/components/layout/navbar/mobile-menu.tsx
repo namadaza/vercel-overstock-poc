@@ -1,22 +1,28 @@
 'use client';
 
-import { Dialog, Transition } from '@headlessui/react';
-import Link from 'next/link';
+import { Transition } from '@headlessui/react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { Fragment, Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Menu } from 'lib/shopify/types';
-import Search, { SearchSkeleton } from './search';
+import { HeaderTopNav } from 'lib/contentstack/types';
+import MobileSubmenu from './mobile-submenu';
 
-export default function MobileMenu({ menu }: { menu: Menu[] }) {
+export default function MobileMenu({ topNav }: { topNav: HeaderTopNav; }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
-  const openMobileMenu = () => setIsOpen(true);
-  const closeMobileMenu = () => setIsOpen(false);
+  const [subMenu, setSubMenu] = useState('');
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const handleSubMenu = (menu: string) => () => setSubMenu(menu);
 
   useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+
     const handleResize = () => {
       if (window.innerWidth > 768) {
         setIsOpen(false);
@@ -33,67 +39,32 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
   return (
     <>
       <button
-        onClick={openMobileMenu}
+        onClick={toggleMenu}
         aria-label="Open mobile menu"
         className="flex h-11 w-11 items-center justify-center md:hidden text-white"
       >
-        <Bars3Icon className="h-8" />
+        {isOpen ? <XMarkIcon className="h-6" /> : <Bars3Icon className="h-8" />}
       </button>
       <Transition show={isOpen}>
-        <Dialog onClose={closeMobileMenu} className="relative z-50">
-          <Transition.Child
-            as={Fragment}
-            enter="transition-all ease-in-out duration-300"
-            enterFrom="opacity-0 backdrop-blur-none"
-            enterTo="opacity-100 backdrop-blur-[.5px]"
-            leave="transition-all ease-in-out duration-200"
-            leaveFrom="opacity-100 backdrop-blur-[.5px]"
-            leaveTo="opacity-0 backdrop-blur-none"
-          >
-            <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-          </Transition.Child>
-          <Transition.Child
-            as={Fragment}
-            enter="transition-all ease-in-out duration-300"
-            enterFrom="translate-x-[-100%]"
-            enterTo="translate-x-0"
-            leave="transition-all ease-in-out duration-200"
-            leaveFrom="translate-x-0"
-            leaveTo="translate-x-[-100%]"
-          >
-            <Dialog.Panel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col bg-white pb-6 dark:bg-black">
-              <div className="p-4">
-                <button
-                  className="mb-4 flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white"
-                  onClick={closeMobileMenu}
-                  aria-label="Close mobile menu"
-                >
-                  <XMarkIcon className="h-6" />
-                </button>
-
-                <div className="mb-4 w-full">
-                  <Suspense fallback={<SearchSkeleton />}>
-                    <Search />
-                  </Suspense>
-                </div>
-                {menu.length ? (
-                  <ul className="flex w-full flex-col">
-                    {menu.map((item: Menu) => (
-                      <li
-                        className="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white"
-                        key={item.title}
-                      >
-                        <Link href={item.path} prefetch={true} onClick={closeMobileMenu}>
-                          {item.title}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-              </div>
-            </Dialog.Panel>
-          </Transition.Child>
-        </Dialog>
+        <div className="absolute top-[100%] left-0 w-lvw flex flex-col bg-brand-red border-t-[1px] border-t-white/20 px-4 pb-6 overflow-scroll h-lvh">
+          {topNav?.level_one?.length && topNav?.level_one.map(l1 => (
+            <div
+              key={l1.link.title}
+              className="flex border-b-[1px] border-b-white/20 h-auto w-auto"
+            >
+              <li
+                className="list-none p-6 w-full"
+                onClick={handleSubMenu(l1.link.title)}
+                role="button"
+              >
+                {l1.link.title}
+              </li>
+              <Transition show={l1.link.title === subMenu} as="div">
+                  <MobileSubmenu levelOne={l1} closeMenu={handleSubMenu('')} />
+              </Transition>
+            </div>
+          ))}
+        </div>
       </Transition>
     </>
   );
