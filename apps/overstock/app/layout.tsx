@@ -1,6 +1,6 @@
 import AppScripts from "components/app-scripts";
-import AppStylesheets from "components/app-stylesheets";
 import { CartProvider } from "components/cart/cart-context";
+import ContentCards from "components/content-cards";
 import Footer from "components/layout/footer";
 import { Navbar } from "components/layout/navbar";
 import LivePreviewInitComponent from "lib/contentstack/livePreviewInit";
@@ -45,7 +45,7 @@ export default async function RootLayout({
           <Footer />
         </CartProvider>
         <AppScripts />
-        <AppStylesheets />
+        <ContentCards />
       </body>
     </html>
   );
