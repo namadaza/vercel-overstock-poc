@@ -1,5 +1,5 @@
 import Slider from "components/slider";
-import { getProducts } from "lib/shopify";
+import { getFeaturedDeals } from "lib/shopify";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
@@ -7,12 +7,11 @@ import { Suspense } from "react";
 
 async function Render() {
   const date = new Date();
-  const query = `featured-${date.toISOString().split("T")[0]}`;
+  const tag = `featured-${date.toISOString().split("T")[0]}`;
 
-  const products = await getProducts({
-    query,
-  }).then((res) => {
-    return res.filter((product) => product.tags.includes(query)).slice(0, 5);
+  const products = await getFeaturedDeals({
+    collection: "featured-deals",
+    tag,
   });
 
   return (
