@@ -230,8 +230,6 @@ export default function Search() {
     router.push(createUrl("/search", newParams));
   }
 
-  console.log("suggestions", suggestions);
-
   return (
     <div
       ref={searchRef}

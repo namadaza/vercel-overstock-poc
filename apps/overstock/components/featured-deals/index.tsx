@@ -10,7 +10,7 @@ async function Render() {
   const tag = `featured-${date.toISOString().split("T")[0]}`;
 
   const products = await getFeaturedDeals({
-    collection: "featured-deals",
+    collection: "all-products",
     tag,
   });
 
@@ -96,9 +96,6 @@ async function Render() {
                     merchant_group_id: "1939031562",
                     merchant_id: "1280018588",
                     page_id: "${id}",
-                    on_render: function(config, data) {
-                        console.log(data);
-                    },
                     components: {
                       CategorySnippet: "pr-reviewsnippet-${id}"
                     }

@@ -78,6 +78,7 @@ function AppScripts() {
         src="https://ui.powerreviews.com/stable/4.1/ui.js"
         strategy="lazyOnload"
       />
+      <Script src="https://checkout.overstock.com/cdn/shop/t/69/assets/content-cards.js?v=25858787523254501921720759668" strategy="lazyOnload" />
     </>
   );
 }
