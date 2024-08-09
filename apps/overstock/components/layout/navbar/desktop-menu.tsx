@@ -1,9 +1,9 @@
 'use client';
 
 import { Transition } from '@headlessui/react';
+import { HeaderTopNav } from 'lib/contentstack/types';
 import Link from 'next/link';
 import { Fragment, useState } from 'react';
-import { HeaderTopNav } from 'lib/contentstack/types';
 
 // Add Top Nav Type
 export default function DesktopMenu({ topNav } : { topNav: HeaderTopNav }) {
@@ -17,7 +17,7 @@ export default function DesktopMenu({ topNav } : { topNav: HeaderTopNav }) {
 
     return (
         <Fragment>
-            <div className="container flex flex-wrap items-end w-full" onMouseLeave={closeMenu}>
+            <div className="px-2 pt-2 container flex flex-wrap items-end w-full" onMouseLeave={closeMenu}>
                 {topNav?.level_one?.length && topNav?.level_one.map(l1 => {
                     return (
                         <div
@@ -30,7 +30,8 @@ export default function DesktopMenu({ topNav } : { topNav: HeaderTopNav }) {
                                 {l1.link.title}
                             </Link>
                             <Transition show={l1.link.title === menu}>
-                                <div className="grid grid-cols-4 gap-x-16 gap-y-8 absolute top-[100%] left-0 w-lvw p-4 bg-white text-black -z-10">
+                                <div className="absolute top-[100%] left-0 w-lvw bg-white text-black -z-10">
+                                    <div className='container mx-auto grid grid-cols-4 gap-x-16 gap-y-8 p-4'>
                                     {l1?.level_two?.map(l2 => {
                                         return (
                                             <div
@@ -52,6 +53,7 @@ export default function DesktopMenu({ topNav } : { topNav: HeaderTopNav }) {
                                             </div>
                                         )
                                     })}
+                                </div>
                                 </div>
                             </Transition>
                         </div>
