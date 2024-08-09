@@ -30,6 +30,12 @@ const productFragment = /* GraphQL */ `
           id
           title
           availableForSale
+          isOnSale: metafield(namespace: "byon", key: "optionIsOnSale") {
+            value
+          }
+          referencePricing: metafield(namespace: "byon", key: "referencePricing") {
+            value
+          }
           selectedOptions {
             name
             value

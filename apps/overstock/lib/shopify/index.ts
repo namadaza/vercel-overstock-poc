@@ -19,6 +19,7 @@ import {
   getCollectionProductsQuery,
   getCollectionQuery,
   getCollectionsQuery,
+  getFeaturedDealsQuery,
 } from "./queries/collection";
 import { getMenuQuery } from "./queries/menu";
 import { getPageQuery, getPagesQuery } from "./queries/page";
@@ -323,6 +324,38 @@ export async function getCollectionProducts({
       handle: collection,
       reverse,
       sortKey: sortKey === "CREATED_AT" ? "CREATED" : sortKey,
+    },
+  });
+
+  if (!res.body.data.collection) {
+    console.log(`No collection found for \`${collection}\``);
+    return [];
+  }
+
+  return reshapeProducts(
+    removeEdgesAndNodes(res.body.data.collection.products),
+  );
+}
+
+export async function getFeaturedDeals({
+  collection,
+  reverse,
+  sortKey,
+  tag,
+}: {
+  collection: string;
+  reverse?: boolean;
+  sortKey?: string;
+  tag: string;
+}): Promise<Product[]> {
+  const res = await shopifyFetch<any>({
+    query: getFeaturedDealsQuery,
+    tags: [TAGS.collections, TAGS.products],
+    variables: {
+      handle: collection,
+      reverse,
+      sortKey: sortKey === "CREATED_AT" ? "CREATED" : sortKey,
+      tag,
     },
   });
 
