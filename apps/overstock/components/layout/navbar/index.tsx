@@ -63,12 +63,7 @@ export async function Navbar() {
           );
         })}
       </menu>
-      <nav className="bg-brand-red text-white flex flex-col items-center justify-between py-4 pb-0 sticky z-40 top-0">
-        <div className="block flex-none md:hidden pl-4">
-          <Suspense fallback={null}>
-            <MobileMenu menu={menu} />
-          </Suspense>
-        </div>
+      <nav className="bg-brand-red border-b-white border-b-[1px] text-white flex flex-col items-center justify-between py-4 pb-0 sticky z-40 top-0">
         <div className="flex container mx-auto items-center px-4 lg:px-6">
           <div className="flex w-full md:w-1/4">
             <Link
@@ -121,6 +116,11 @@ export async function Navbar() {
               <span id="badge" />
             </span>
             <CartModal />
+            <div className="block flex-none md:hidden pl-4">
+              <Suspense fallback={null}>
+                <MobileMenu topNav={topNav} />
+              </Suspense>
+            </div>
           </div>
         </div>
         <Suspense fallback={null}>
