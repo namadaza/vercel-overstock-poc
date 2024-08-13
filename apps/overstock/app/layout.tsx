@@ -37,6 +37,12 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://checkout.overstock.com" />
+        <link rel="preconnect" href="https://images.contentstack.io" />
+        <link rel="preconnect" href="https://js.appboycdn.com" />
+        <link rel="preconnect" href="https://ui.powerreviews.com" />
+      </head>
       <body className="bg-white text-black antialiased">
         <LivePreviewInitComponent />
         <CartProvider cartPromise={cart}>
