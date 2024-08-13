@@ -1,11 +1,10 @@
 "use client";
 
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { createUrl } from "lib/utils";
+import { createUrl, debounce } from "lib/utils";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { debounce } from "lib/utils";
-import Link from "next/link";
 
 const SEARCH_DEBOUNCE_MS = 700;
 
@@ -231,8 +230,6 @@ export default function Search() {
     router.push(createUrl("/search", newParams));
   }
 
-  console.log("suggestions", suggestions);
-
   return (
     <div
       ref={searchRef}
@@ -243,14 +240,14 @@ export default function Search() {
           key={searchParams?.get("q")}
           type="text"
           name="search"
-          placeholder="Search for products..."
+          placeholder="Search Crazy-Good Deals"
           autoComplete="off"
-          className="text-md w-full rounded-full bg-white px-4 py-2 text-black placeholder:text-neutral-500 md:text-sm"
+          className="text-base w-full rounded-full bg-white pl-8 pr-4 py-2 text-black placeholder:text-neutral-500"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <div className="absolute right-0 top-0 mr-3 flex h-full items-center">
-          <MagnifyingGlassIcon className="h-4" />
+        <div className="absolute left-0 top-0 ml-3 flex h-full items-center">
+          <MagnifyingGlassIcon className="h-4 text-black" />
         </div>
         {isPopoverOpen && suggestions.length > 0 && (
           <div className="absolute z-10 w-full bg-white mt-4 rounded-md shadow-lg border border-gray-300">
