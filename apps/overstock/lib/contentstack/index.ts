@@ -1,5 +1,6 @@
 import * as Utils from "@contentstack/utils";
 import { LivePreviewQuery } from "contentstack";
+import { unstable_cache } from "next/cache";
 import { GetEntry, HeroOne2x1 } from "./types";
 import { initializeContentStackSdk } from "./utils";
 
@@ -68,13 +69,21 @@ export const getHeaderTopNav = async (): Promise<any> => {
   return headerTopNav[0][0];
 };
 
-
-export const getHomePage = async (): Promise<any> => {
-  const homePage = (await getEntry({
+const getCachedHomePage = unstable_cache(async () => {
+  const homePage = await getEntry({
     contentTypeUid: "home_page",
     referenceFieldPath: undefined,
     jsonRtePath: undefined,
-  })) as any;
+  }) as any
 
-  return homePage[0][0];
+  return homePage[0][0]
+}, ['home-page'], {
+  revalidate: 60 * 60 * 24,
+  tags: ['home-page'],
+},)
+
+export const getHomePage = async (): Promise<any> => {
+  const homePage = await getCachedHomePage()
+
+  return homePage;
 };
