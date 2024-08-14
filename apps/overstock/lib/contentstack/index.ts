@@ -1,7 +1,7 @@
 import * as Utils from "@contentstack/utils";
 import { LivePreviewQuery } from "contentstack";
 import { unstable_cache } from "next/cache";
-import { GetEntry, HeroOne2x1 } from "./types";
+import { GetEntry } from "./types";
 import { initializeContentStackSdk } from "./utils";
 
 // SDK initialization
@@ -49,41 +49,36 @@ const getEntry = ({
   });
 };
 
-export const getHeaderOne2x1 = async (): Promise<HeroOne2x1[][]> => {
-  const heroOne2x1Entry = (await getEntry({
-    contentTypeUid: "hero_1_2x1",
-    referenceFieldPath: undefined,
-    jsonRtePath: undefined,
-  })) as unknown as HeroOne2x1[][];
+export async function getHeaderTopNav(): Promise<any> {
+  const nav = await unstable_cache(async () => {
+    const headerTopNav = (await getEntry({
+      contentTypeUid: "header_top_nav",
+      referenceFieldPath: undefined,
+      jsonRtePath: undefined,
+    })) as any;
+  
+    return headerTopNav[0][0];
+  }, ['top-nav'], {
+    revalidate: 60 * 60 * 24,
+    tags: ['top-nav'],
+  })()
 
-  return heroOne2x1Entry;
+  return nav
 };
 
-export const getHeaderTopNav = async (): Promise<any> => {
-  const headerTopNav = (await getEntry({
-    contentTypeUid: "header_top_nav",
-    referenceFieldPath: undefined,
-    jsonRtePath: undefined,
-  })) as any;
+export async function getHomePage(): Promise<any> {
+  const page = await unstable_cache(async () => {
+    const homePage = await getEntry({
+      contentTypeUid: "home_page",
+      referenceFieldPath: undefined,
+      jsonRtePath: undefined,
+    }) as any
+  
+    return homePage[0][0]
+  }, ['home-page'], {
+    revalidate: 60 * 60 * 24,
+    tags: ['home-page'],
+  },)()
 
-  return headerTopNav[0][0];
-};
-
-const getCachedHomePage = unstable_cache(async () => {
-  const homePage = await getEntry({
-    contentTypeUid: "home_page",
-    referenceFieldPath: undefined,
-    jsonRtePath: undefined,
-  }) as any
-
-  return homePage[0][0]
-}, ['home-page'], {
-  revalidate: 60 * 60 * 24,
-  tags: ['home-page'],
-},)
-
-export const getHomePage = async (): Promise<any> => {
-  const homePage = await getCachedHomePage()
-
-  return homePage;
+  return page
 };
