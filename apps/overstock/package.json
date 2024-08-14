@@ -18,6 +18,8 @@
     "@heroicons/react": "2.1.5",
     "@playwright/test": "1.45.3",
     "@repo/ui": "workspace:*",
+    "@vercel/flags": "2.6.0",
+    "@vercel/speed-insights": "1.0.12",
     "clsx": "2.1.1",
     "contentstack": "3.20.3",
     "next": "15.0.0-canary.115",
