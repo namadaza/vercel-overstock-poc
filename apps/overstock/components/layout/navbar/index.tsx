@@ -1,4 +1,3 @@
-import CartModal from "components/cart/modal";
 import Logo from "components/logo";
 import { getHeaderTopNav } from "lib/contentstack";
 import Link from "next/link";
@@ -113,7 +112,7 @@ export async function Navbar() {
               </svg>
               <span id="badge" />
             </span>
-            <CartModal />
+            {/* <CartModal /> */}
             <div className="block flex-none md:hidden pl-4">
               <Suspense fallback={null}>
                 <MobileMenu topNav={topNav} />
