@@ -16,11 +16,11 @@ export async function GET() {
     definitions: {
       featuredDeals: {
         description: "The date of the featured deals to display.",
-        // TODO: Dynamic
         options: [
+          // TODO: Remove
           {
-            label: "2024-08-09",
-            value: "featured-2024-08-09",
+            label: ,
+            value: "2024-08-09",
           },
           ...Array.from(Array(30).keys()).map((i) => {
             const value = addDays(date, i).toISOString().split("T")[0];
