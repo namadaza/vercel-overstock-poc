@@ -43,7 +43,7 @@ const setLivePreviewConfig = (): LivePreview => {
 // contentstack sdk initialization
 export const initializeContentStackSdk = (): Stack => {
   if (!isBasicConfigValid())
-    throw new Error("Please set you .env file before running starter app");
+    throw new Error("Please set your .env file before running starter app");
   const stackConfig: Config = {
     api_key: CONTENTSTACK_API_KEY as string,
     delivery_token: CONTENTSTACK_DELIVERY_TOKEN as string,

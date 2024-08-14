@@ -82,3 +82,13 @@ export async function getHomePage(): Promise<any> {
 
   return page
 };
+
+export const getFooter = async (): Promise<any> => {
+  const footer = (await getEntry({
+    contentTypeUid: "footer",
+    referenceFieldPath: undefined,
+    jsonRtePath: undefined,
+  })) as any;
+
+  return footer[0][0];
+};

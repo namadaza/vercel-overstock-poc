@@ -42,6 +42,18 @@ export type NavLevel = {
   link: Link;
 }
 
+export type FooterLinks = {
+  href: string;
+  title: string;
+  url: Link;
+  svg: string
+}
+export type FooterSections = {
+  title: string;
+  link: [];
+}
+
+
 type Link = {
   title: string;
   href: string;
