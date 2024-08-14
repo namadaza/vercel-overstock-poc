@@ -1,7 +1,6 @@
 import CartModal from "components/cart/modal";
 import Logo from "components/logo";
 import { getHeaderTopNav } from "lib/contentstack";
-import { getMenu } from "lib/shopify";
 import Link from "next/link";
 import { Suspense } from "react";
 import DesktopMenu from "./desktop-menu";
@@ -44,7 +43,6 @@ const preNavItems = [
 ];
 
 export async function Navbar() {
-  const menu = await getMenu("next-js-frontend-header-menu");
   const topNav = await getHeaderTopNav();
 
   return (
@@ -63,7 +61,7 @@ export async function Navbar() {
           );
         })}
       </menu>
-      <nav className="bg-brand-red border-b-white border-b-[1px] text-white flex flex-col items-center justify-between py-4 pb-0 sticky z-40 top-0">
+      <nav className="bg-brand-red text-white flex flex-col items-center justify-between py-4 pb-0 sticky z-40 top-0">
         <div className="flex container mx-auto items-center px-4 lg:px-6">
           <div className="flex w-full md:w-1/4">
             <Link

@@ -338,21 +338,19 @@ export async function getCollectionProducts({
 }
 
 export async function getFeaturedDeals({
-  collection,
   reverse,
   sortKey,
   tag,
 }: {
-  collection: string;
   reverse?: boolean;
   sortKey?: string;
   tag: string;
 }): Promise<Product[]> {
   const res = await shopifyFetch<any>({
     query: getFeaturedDealsQuery,
-    tags: [TAGS.collections, TAGS.products],
+    tags: ['featured-deals'],
     variables: {
-      handle: collection,
+      handle:  "all-products",
       reverse,
       sortKey: sortKey === "CREATED_AT" ? "CREATED" : sortKey,
       tag,
@@ -360,7 +358,7 @@ export async function getFeaturedDeals({
   });
 
   if (!res.body.data.collection) {
-    console.log(`No collection found for \`${collection}\``);
+    console.log(`No collection found for \`all-products\``);
     return [];
   }
 
