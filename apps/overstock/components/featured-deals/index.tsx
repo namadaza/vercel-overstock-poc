@@ -148,7 +148,15 @@ async function Render() {
 
 function FeaturedDeals() {
   return (
-    <Suspense fallback={<div className="w-full bg-brand-pink aspect-[3/1]" />}>
+    <Suspense fallback={<Slider desktopColumns={5} mobileColumns={1.5} viewport="both">
+      {Array.from(Array(5).keys()).map(i => <div className="bg-white border p-2 h-full" key={i}>
+        <div className="w-full aspect-square relative mb-4" />
+        <div className="w-full h-5" />
+        <div className="w-full h-7 mb-1" />
+        <div className="w-full h-12" />
+        <div className="w-full h-5" />
+      </div>)}
+    </Slider>}>
       <Render />
     </Suspense>
   );
