@@ -14,8 +14,7 @@ async function Render() {
   const date = new Date(
     new Date().toLocaleString("en", { timeZone: "America/Los_Angeles" })
   );
-  const tag =
-    overrides?.featuredDeals ?? `featured-${date.toISOString().split("T")[0]}`;
+  const tag = `featured-${overrides?.featuredDeals ?? date.toISOString().split("T")[0]}`;
 
   const products = await getFeaturedDeals({
     collection: "all-products",
