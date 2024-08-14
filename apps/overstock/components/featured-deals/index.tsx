@@ -17,7 +17,6 @@ async function Render() {
   const tag = `featured-${overrides?.featuredDeals ?? date.toISOString().split("T")[0]}`;
 
   const products = await getFeaturedDeals({
-    collection: "all-products",
     tag,
   });
 
