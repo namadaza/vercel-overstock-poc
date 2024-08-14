@@ -91,7 +91,7 @@ for (var attr in meta) {
         strategy="lazyOnload"
       />
       <Script
-        src="https://checkout.overstock.com/cdn/shop/t/69/assets/custom-scripts.js?v=116197405177837524791719526878"
+        src="https://checkout.overstock.com/cdn/shop/t/69/assets/custom-scripts.js"
         strategy="lazyOnload"
       />
       <Script
