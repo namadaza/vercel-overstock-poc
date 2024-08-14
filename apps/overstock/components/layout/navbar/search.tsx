@@ -233,7 +233,7 @@ export default function Search() {
   return (
     <div
       ref={searchRef}
-      className="w-max-[550px] relative w-full lg:w-80 xl:w-full"
+      className="relative w-full"
     >
       <form onSubmit={onSubmit}>
         <input
@@ -285,13 +285,13 @@ export default function Search() {
 
 export function SearchSkeleton() {
   return (
-    <form className="w-max-[550px] relative w-full lg:w-80 xl:w-full">
+    <form className="relative w-full">
       <input
-        placeholder="Search for products..."
-        className="w-full rounded-lg border bg-white px-4 py-2 text-sm text-black placeholder:text-neutral-500 dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400"
+        placeholder="Search Crazy-Good Deals"
+        className="text-base w-full rounded-full bg-white pl-8 pr-4 py-2 text-black placeholder:text-neutral-500"
       />
-      <div className="absolute right-0 top-0 mr-3 flex h-full items-center">
-        <MagnifyingGlassIcon className="h-4" />
+      <div className="absolute left-0 top-0 ml-3 flex h-full items-center">
+        <MagnifyingGlassIcon className="h-4 text-black" />
       </div>
     </form>
   );
