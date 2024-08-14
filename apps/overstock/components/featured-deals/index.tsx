@@ -1,4 +1,4 @@
-import { decrypt, type FlagOverridesType } from '@vercel/flags';
+import { decrypt, type FlagOverridesType } from "@vercel/flags";
 import Slider from "components/slider";
 import { getFeaturedDeals } from "lib/shopify";
 import { cookies } from "next/headers";
@@ -8,9 +8,14 @@ import Script from "next/script";
 import { Suspense } from "react";
 
 async function Render() {
-  const overrides = await decrypt<FlagOverridesType>(cookies().get('vercel-flag-overrides')?.value ?? '{}') as { featuredDeals?: string }
-  const date = new Date();
-  const tag = overrides?.featuredDeals ?? `featured-${date.toISOString().split("T")[0]}`;
+  const overrides = (await decrypt<FlagOverridesType>(
+    cookies().get("vercel-flag-overrides")?.value ?? "{}"
+  )) as { featuredDeals?: string };
+  const date = new Date(
+    new Date().toLocaleString("en", { timeZone: "America/Los_Angeles" })
+  );
+  const tag =
+    overrides?.featuredDeals ?? `featured-${date.toISOString().split("T")[0]}`;
 
   const products = await getFeaturedDeals({
     collection: "all-products",

@@ -1,7 +1,17 @@
-import { type ApiData } from '@vercel/flags'
-import { NextResponse } from 'next/server'
+import { type ApiData } from '@vercel/flags';
+import { NextResponse } from 'next/server';
+
+function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
 
 export async function GET() {
+    const date = new Date(
+        new Date().toLocaleString("en", { timeZone: "America/Los_Angeles" })
+      );
+
     return NextResponse.json<ApiData>({ definitions: {
         'featuredDeals': {
             description: 'The date of the featured deals to display.',
@@ -9,7 +19,15 @@ export async function GET() {
             options: [{
                 label: '2024-08-09',
                 value: 'featured-2024-08-09',
-            }]
+            }, ...(Array.from(Array(30).keys())).map(i => {
+                const valueDate = addDays(date, i)
+                const label = valueDate.toISOString().split("T")[0]
+
+                return {
+                    label,
+                    value: `featured-${label}`
+                }
+            })]
         }
     } })
 }
