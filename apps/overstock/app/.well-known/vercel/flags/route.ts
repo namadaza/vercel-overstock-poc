@@ -8,7 +8,7 @@ export async function GET() {
             // TODO: Dynamic
             options: [{
                 label: '2024-08-09',
-                value: '2024-08-09',
+                value: 'featured-2024-08-09',
             }]
         }
     } })
