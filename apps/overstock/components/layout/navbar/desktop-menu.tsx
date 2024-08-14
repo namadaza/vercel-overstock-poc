@@ -17,7 +17,7 @@ export default function DesktopMenu({ topNav } : { topNav: HeaderTopNav }) {
 
     return (
         <Fragment>
-            <div className="px-2 pt-2 container flex flex-wrap items-end w-full" onMouseLeave={closeMenu}>
+            <div className="px-2 pt-2 container hidden md:flex flex-wrap items-end w-full" onMouseLeave={closeMenu}>
                 {topNav?.level_one?.length && topNav?.level_one.map(l1 => {
                     return (
                         <div
