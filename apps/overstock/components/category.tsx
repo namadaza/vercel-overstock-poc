@@ -55,7 +55,7 @@ const Category = ({ category }: { category: CategoryType }) => {
         <div className={`rounded-full w-full aspect-square overflow-hidden`}>
             <Image 
                 alt={category.title} 
-                className="w-full h-full object-cover" 
+                className="bg-brand-red w-full h-full object-cover" 
                 height={category.image.dimension.height} 
                 width={category.image.dimension.width} 
                 src={category.image?.url} 
