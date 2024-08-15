@@ -9,10 +9,10 @@ import { Suspense } from "react";
 
 async function Render() {
   const overrides = (await decrypt<FlagOverridesType>(
-    cookies().get("vercel-flag-overrides")?.value ?? "{}"
+    cookies().get("vercel-flag-overrides")?.value ?? "{}",
   )) as { featuredDeals?: string };
   const date = new Date(
-    new Date().toLocaleString("en", { timeZone: "America/Los_Angeles" })
+    new Date().toLocaleString("en", { timeZone: "America/Los_Angeles" }),
   );
   const tag = `featured-${overrides?.featuredDeals ?? date.toISOString().split("T")[0]}`;
 
@@ -25,7 +25,7 @@ async function Render() {
       {products.map((product) => {
         const id = product.handle.split("-").pop();
         const referencePricing = JSON.parse(
-          product.variants[0]?.referencePricing?.value ?? "{}"
+          product.variants[0]?.referencePricing?.value ?? "{}",
         );
 
         return (
@@ -43,7 +43,7 @@ async function Render() {
                   height={640}
                   src={product.images[0]!.url}
                   width={640}
-                  unoptimized
+                  // unoptimized
                 />
                 {product.images.length > 1 && (
                   <Image
@@ -52,7 +52,7 @@ async function Render() {
                     height={640}
                     src={product.images[1]!.url}
                     width={640}
-                    unoptimized
+                    // unoptimized
                   />
                 )}
               </div>
@@ -68,7 +68,7 @@ async function Render() {
                         maximumFractionDigits: 2,
                         minimumFractionDigits: 2,
                         style: "currency",
-                      }
+                      },
                     )}
                   </span>{" "}
                   {referencePricing.MSRP.sellingPercentageOff}% Off MSRP
@@ -82,7 +82,7 @@ async function Render() {
                     maximumFractionDigits: 2,
                     minimumFractionDigits: 2,
                     style: "currency",
-                  }
+                  },
                 )}
               </li>
               <li className="line-clamp-2">{product.title}</li>
@@ -107,12 +107,12 @@ async function Render() {
                     }
                   });
                 }
-              
+
                 function observeReviews() {
                   const targetNode = document.getElementById("pr-reviewsnippet-${id}");
-              
+
                   const config = { childList: true, subtree: true };
-              
+
                   const callback = function(mutationsList, observer) {
                     for (const mutation of mutationsList) {
                       if (mutation.type === 'childList') {
@@ -127,14 +127,14 @@ async function Render() {
                       }
                     }
                   };
-              
+
                   const observer = new MutationObserver(callback);
                   observer.observe(targetNode, config);
                 }
-                
+
                 loadReviews();
                 observeReviews();
-                
+
                 new Promise((r) => setTimeout(r, 5000)).then(() => {});
               `}</Script>
             </ul>
@@ -147,15 +147,21 @@ async function Render() {
 
 function FeaturedDeals() {
   return (
-    <Suspense fallback={<Slider desktopColumns={5} mobileColumns={1.5} viewport="both">
-      {Array.from(Array(5).keys()).map(i => <div className="bg-white border p-2 h-full" key={i}>
-        <div className="w-full aspect-square relative mb-4" />
-        <div className="w-full h-5" />
-        <div className="w-full h-7 mb-1" />
-        <div className="w-full h-12" />
-        <div className="w-full h-5" />
-      </div>)}
-    </Slider>}>
+    <Suspense
+      fallback={
+        <Slider desktopColumns={5} mobileColumns={1.5} viewport="both">
+          {Array.from(Array(5).keys()).map((i) => (
+            <div className="bg-white border p-2 h-full" key={i}>
+              <div className="w-full aspect-square relative mb-4" />
+              <div className="w-full h-5" />
+              <div className="w-full h-7 mb-1" />
+              <div className="w-full h-12" />
+              <div className="w-full h-5" />
+            </div>
+          ))}
+        </Slider>
+      }
+    >
       <Render />
     </Suspense>
   );
