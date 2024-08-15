@@ -4,6 +4,7 @@ import AppScripts from "components/app-scripts";
 import ContentCards from "components/content-cards";
 import Footer from "components/layout/footer";
 import { Navbar } from "components/layout/navbar";
+import NewCart from 'components/new-cart';
 import LivePreviewInitComponent from "lib/contentstack/livePreviewInit";
 import { type ReactNode, Suspense } from "react";
 import "./globals.css";
@@ -50,6 +51,7 @@ export default async function RootLayout({
         <AppScripts />
         <ContentCards />
         <SpeedInsights />
+        <NewCart />
         <Suspense>
           <RenderFlags />
         </Suspense>
