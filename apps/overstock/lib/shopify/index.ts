@@ -348,7 +348,7 @@ export async function getFeaturedDeals({
 }): Promise<Product[]> {
   const res = await shopifyFetch<any>({
     query: getFeaturedDealsQuery,
-    tags: ['featured-deals'],
+    tags: [tag, 'featured-deals'],
     variables: {
       handle:  "all-products",
       reverse,
