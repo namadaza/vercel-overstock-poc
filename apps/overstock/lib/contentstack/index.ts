@@ -50,7 +50,7 @@ const getEntry = ({
 };
 
 export async function getHeaderTopNav(): Promise<any> {
-  const nav = await unstable_cache(async () => {
+  const entry = await unstable_cache(async () => {
     const headerTopNav = (await getEntry({
       contentTypeUid: "header_top_nav",
       referenceFieldPath: undefined,
@@ -63,11 +63,11 @@ export async function getHeaderTopNav(): Promise<any> {
     tags: ['top-nav'],
   })()
 
-  return nav
+  return entry
 };
 
 export async function getHomePage(): Promise<any> {
-  const page = await unstable_cache(async () => {
+  const entry = await unstable_cache(async () => {
     const homePage = await getEntry({
       contentTypeUid: "home_page",
       referenceFieldPath: undefined,
@@ -80,15 +80,22 @@ export async function getHomePage(): Promise<any> {
     tags: ['home-page'],
   },)()
 
-  return page
+  return entry
 };
 
-export const getFooter = async (): Promise<any> => {
-  const footer = (await getEntry({
-    contentTypeUid: "footer",
-    referenceFieldPath: undefined,
-    jsonRtePath: undefined,
-  })) as any;
+export async function getFooter(): Promise<any> {
+  const entry = await unstable_cache(async () => {
+    const footer = (await getEntry({
+      contentTypeUid: "footer",
+      referenceFieldPath: undefined,
+      jsonRtePath: undefined,
+    })) as any;
+  
+    return footer[0][0];
+  }, ['footer'], {
+    revalidate: 60 * 60 * 24,
+    tags: ['footer'],
+  })()
 
-  return footer[0][0];
-};
+  return entry
+}

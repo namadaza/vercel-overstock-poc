@@ -113,7 +113,6 @@ export default async function Footer() {
               {payment_options?.payment_options?.map((prop: FooterLinks) => {
                 return (
                   <div
-                    className="mr-2"
                     title={prop?.url?.title}
                     dangerouslySetInnerHTML={{ __html: prop.svg }}
                   />

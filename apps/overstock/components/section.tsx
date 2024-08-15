@@ -40,12 +40,12 @@ function Section({ index, section }: { index: number; section: any }) {
                 {!!card.image && (
                   <Image
                     alt="Hello World"
-                    className="bg-black block w-full h-auto"
+                    className="bg-brand-red block w-full h-auto"
                     height={card.image.dimension.height}
                     priority={index === 0}
+                    loading={index === 0 || 1 ? "eager" : 'lazy'}
                     src={card.image.url}
                     width={card.image.dimension.width}
-                    unoptimized
                   />
                 )}
               </Link>
