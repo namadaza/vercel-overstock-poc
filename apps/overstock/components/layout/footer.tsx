@@ -3,6 +3,7 @@ import { FooterLinks } from "lib/contentstack/types";
 import Link from "next/link";
 import { Suspense } from "react";
 import FooterForm from "./footer-form";
+import FooterCompanyLinks from './footer-links';
 
 const { COMPANY_NAME, SITE_NAME } = process.env;
 const footerProps = [
@@ -87,7 +88,7 @@ export default async function Footer() {
         <footer className="flex justify-center align-middle bg-brand-red text-sm text-white pt-6">
           <div className="flex container flex-col px-4 lg:px-6 py-6 text-sm">
             <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-8 px-4 lg:px-6 text-sm">
-              <div>
+              <div className="border-b border-white border-opacity-20 md:border-hidden pb-4">
                 <div className="text-base mb-6">{company_description}</div>
                 <div className="flex">
                   {social_media?.social_media_share?.map(
@@ -105,58 +106,11 @@ export default async function Footer() {
                     }
                   )}
                 </div>
-              </div>
-              <div>
-        <h2 className="uppercase mb-6 font-bold text-lg">
-          {my_account?.title}
-        </h2>
-        {my_account?.link?.map((prop: FooterLinks, index: number) => {
-          return (
-            <Link
-              className="my-auto flex gap-4 mb-6 text-base"
-              href={prop.href}
-              key={index}
-            >
-              {prop.title}
-            </Link>
-          );
-        })}
-      </div>
-      <div>
-        <h2 className="uppercase mb-6 font-bold text-lg">
-          {let_us_help?.title}
-        </h2>
-        {let_us_help?.link?.map((prop: FooterLinks, index: number) => {
-          return (
-            <Link
-              className="my-auto flex gap-4 mb-6 text-base"
-              href={prop.href}
-              key={index}
-            >
-              {prop.title}
-            </Link>
-          );
-        })}
-      </div>
-      <div>
-        <h2 className="uppercase mb-6 font-bold text-lg">
-          {company_information?.title}
-        </h2>
-        {company_information?.link?.map((prop: FooterLinks, index: number) => {
-          return (
-            <Link
-              className="my-auto flex gap-4 mb-6 text-base"
-              href={prop.href}
-              key={index}
-            >
-              {prop.title}
-            </Link>
-          );
-        })}
-      </div>
-            </div>
-            <div className="flex flex-wrap gap-2 md:justify-end sm:justify-center m-8 max-w-full scrollbar-none">
-              {payment_options?.payment_options?.map((prop: FooterLinks, index: number) => {
+              </div> 
+              <FooterCompanyLinks company_information={company_information} let_us_help={let_us_help} my_account={my_account} />
+             </div>
+            <div className="flex md:justify-end sm:justify-center m-8">
+              {payment_options?.payment_options?.map((prop: FooterLinks) => {
                 return (
                   <div
                   dangerouslySetInnerHTML={{ __html: prop.svg }}
@@ -197,3 +151,4 @@ export default async function Footer() {
     </>
   );
 }
+
