@@ -1,7 +1,9 @@
+import { CartProvider } from "components/cart/cart-context";
 import CartModal from "components/cart/modal";
 import Logo from "components/logo";
 import { getHeaderTopNav } from "lib/contentstack";
-import { getMenu } from "lib/shopify";
+import { getCart } from "lib/shopify";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import { Suspense } from "react";
 import DesktopMenu from "./desktop-menu";
@@ -43,8 +45,35 @@ const preNavItems = [
   },
 ];
 
+function ShoppingBagIcon({ className }: { className: string }) {
+  return (
+    <svg
+      aria-hidden={true}
+      className={className}
+      fill="currentColor"
+      height={24}
+      role="presentation"
+      viewBox="0 0 24 24"
+      width={24}
+    >
+      <path d="M12 2c2.761 0 5 2.089 5 4.667V8h2.2a.79.79 0 0 1 .8.778v12.444a.79.79 0 0 1-.8.778H4.8a.789.789 0 0 1-.8-.778V8.778A.79.79 0 0 1 4.8 8H7V6.667C7 4.09 9.239 2 12 2zm6.4 7.556H5.6v10.888h12.8V9.556zm-6.4-6c-1.84 0-3.333 1.392-3.333 3.11V8h6.666V6.667c0-1.719-1.492-3.111-3.333-3.111z"></path>
+    </svg>
+  );
+}
+
+async function RenderCart() {
+  const cartId = cookies().get("cartId")?.value;
+  // Don't await the fetch, pass the Promise to the context provider
+  const cart = getCart(cartId);
+
+  return (
+    <CartProvider cartPromise={cart}>
+      <CartModal />
+    </CartProvider>
+  );
+}
+
 export async function Navbar() {
-  const menu = await getMenu("next-js-frontend-header-menu");
   const topNav = await getHeaderTopNav();
 
   return (
@@ -67,9 +96,9 @@ export async function Navbar() {
         <div className="flex container mx-auto items-center px-4 lg:px-6">
           <div className="flex w-1/2 md:w-1/4">
             <Link
-              href="/"
-              prefetch={true}
               className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6"
+              href="/"
+              title="Overstock"
             >
               <Logo className="text-white h-10 w-auto" />
             </Link>
@@ -83,6 +112,7 @@ export async function Navbar() {
             <Link
               className="flex h-8 w-8"
               href="https://www.overstock.com/account/login"
+              title="Account Login"
             >
               <svg
                 className="h-6 w-6 m-auto"
@@ -115,12 +145,20 @@ export async function Navbar() {
               </svg>
               <span id="badge" />
             </span>
-            <CartModal />
-          <div className="flex items-center md:hidden">
-            <Suspense fallback={null}>
-              <MobileMenu topNav={topNav} />
+            <Suspense
+              fallback={
+                <div className="relative flex h-11 w-11 items-center justify-center text-white">
+                  <ShoppingBagIcon className="h-8 w-8" />
+                </div>
+              }
+            >
+              <RenderCart />
             </Suspense>
-          </div>
+            <div className="flex items-center md:hidden pl-4">
+              <Suspense fallback={null}>
+                <MobileMenu topNav={topNav} />
+              </Suspense>
+            </div>
           </div>
         </div>
         <Suspense fallback={null}>

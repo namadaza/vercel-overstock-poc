@@ -1,8 +1,10 @@
+import { getFooter } from "lib/contentstack";
+import { FooterLinks } from "lib/contentstack/types";
 import Link from "next/link";
+import { Suspense } from "react";
 import FooterForm from "./footer-form";
 
 const { COMPANY_NAME, SITE_NAME } = process.env;
-
 const footerProps = [
   {
     description: "$6.99 flat-rate shipping for orders under $50",
@@ -36,6 +38,17 @@ const footerProps = [
 export default async function Footer() {
   const currentYear = new Date().getFullYear();
   const copyrightName = COMPANY_NAME || SITE_NAME || "";
+  const footerItems = await getFooter();
+  const {
+    company_description,
+    company_information,
+    cookies,
+    legal_links,
+    let_us_help,
+    my_account,
+    payment_options,
+    social_media,
+  } = footerItems;
 
   return (
     <>
@@ -70,16 +83,116 @@ export default async function Footer() {
           </div>
         </div>
       </div>
-      <footer className="bg-brand-red text-sm text-white">
-        <div className="py-6 text-sm">
-          <div className="mx-auto flex container flex-col px-4 lg:px-6">
-            <p>
+      <Suspense fallback={null}>
+        <footer className="flex justify-center align-middle bg-brand-red text-sm text-white pt-6">
+          <div className="flex container flex-col px-4 lg:px-6 py-6 text-sm">
+            <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-8 px-4 lg:px-6 text-sm">
+              <div>
+                <div className="text-base mb-6">{company_description}</div>
+                <div className="flex">
+                  {social_media?.social_media_share?.map(
+                    (prop: FooterLinks, index: number) => {
+                      return (
+                        <Link
+                          className="my-auto flex gap-4 mr-5"
+                          title={prop?.url?.title}
+                          href={prop?.url?.href}
+                          key={index}
+                        >
+                          <div dangerouslySetInnerHTML={{ __html: prop.svg }} />
+                        </Link>
+                      );
+                    }
+                  )}
+                </div>
+              </div>
+              <div>
+        <h2 className="uppercase mb-6 font-bold text-lg">
+          {my_account?.title}
+        </h2>
+        {my_account?.link?.map((prop: FooterLinks, index: number) => {
+          return (
+            <Link
+              className="my-auto flex gap-4 mb-6 text-base"
+              href={prop.href}
+              key={index}
+            >
+              {prop.title}
+            </Link>
+          );
+        })}
+      </div>
+      <div>
+        <h2 className="uppercase mb-6 font-bold text-lg">
+          {let_us_help?.title}
+        </h2>
+        {let_us_help?.link?.map((prop: FooterLinks, index: number) => {
+          return (
+            <Link
+              className="my-auto flex gap-4 mb-6 text-base"
+              href={prop.href}
+              key={index}
+            >
+              {prop.title}
+            </Link>
+          );
+        })}
+      </div>
+      <div>
+        <h2 className="uppercase mb-6 font-bold text-lg">
+          {company_information?.title}
+        </h2>
+        {company_information?.link?.map((prop: FooterLinks, index: number) => {
+          return (
+            <Link
+              className="my-auto flex gap-4 mb-6 text-base"
+              href={prop.href}
+              key={index}
+            >
+              {prop.title}
+            </Link>
+          );
+        })}
+      </div>
+            </div>
+            <div className="flex flex-wrap gap-2 md:justify-end sm:justify-center m-8 max-w-full scrollbar-none">
+              {payment_options?.payment_options?.map((prop: FooterLinks) => {
+                return (
+                  <div
+                    title={prop?.url?.title}
+                    dangerouslySetInnerHTML={{ __html: prop.svg }}
+                  />
+                );
+              })}
+            </div>
+            <hr className="mb-8 opacity-20" />
+            <div className="text-xs mb-4">
               &copy; {currentYear} {copyrightName}
               {copyrightName.length && !copyrightName.endsWith(".") ? "." : ""}
-            </p>
+            </div>
+            <div className="flex text-xs mb-4">
+              {legal_links?.link?.map((prop: FooterLinks, index: number) => {
+                return (
+                  <Link
+                    className="my-auto mr-3 underline flex gap-4"
+                    href={prop.href}
+                    key={index}
+                  >
+                    {prop.title}
+                  </Link>
+                );
+              })}
+            </div>
+            {cookies?.cookies_info}{" "}
+            <Link
+              className="my-auto flex gap-4"
+              href={cookies?.cookie_link?.href}
+            >
+              {cookies?.cookie_link?.title}
+            </Link>
           </div>
-        </div>
-      </footer>
+        </footer>
+      </Suspense>
     </>
   );
 }

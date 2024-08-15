@@ -18,9 +18,9 @@ export default async function HomePage({
   const homePage = await getHomePage()
 
   return <div className="grid grid-cols-1 gap-y-12 py-12">
-  {homePage.sections.map(({ section }: any) => {
+  {homePage.sections.map(({ section }: any, index: number) => {
 
-    return <Section key={section._metadata.uid} section={section} />
+    return <Section key={section._metadata.uid} index={index} section={section} />
   })}
   </div>
 }

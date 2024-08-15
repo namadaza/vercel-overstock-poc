@@ -1,16 +1,22 @@
+import { decrypt, type FlagOverridesType } from "@vercel/flags";
 import Slider from "components/slider";
 import { getFeaturedDeals } from "lib/shopify";
+import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { Suspense } from "react";
 
 async function Render() {
-  const date = new Date();
-  const tag = `featured-${date.toISOString().split("T")[0]}`;
+  const overrides = (await decrypt<FlagOverridesType>(
+    cookies().get("vercel-flag-overrides")?.value ?? "{}"
+  )) as { featuredDeals?: string };
+  const date = new Date(
+    new Date().toLocaleString("en", { timeZone: "America/Los_Angeles" })
+  );
+  const tag = `featured-${overrides?.featuredDeals ?? date.toISOString().split("T")[0]}`;
 
   const products = await getFeaturedDeals({
-    collection: "all-products",
     tag,
   });
 
@@ -37,7 +43,6 @@ async function Render() {
                   height={640}
                   src={product.images[0]!.url}
                   width={640}
-                  unoptimized
                 />
                 {product.images.length > 1 && (
                   <Image
@@ -46,7 +51,6 @@ async function Render() {
                     height={640}
                     src={product.images[1]!.url}
                     width={640}
-                    unoptimized
                   />
                 )}
               </div>
@@ -141,7 +145,15 @@ async function Render() {
 
 function FeaturedDeals() {
   return (
-    <Suspense fallback={<div className="w-full bg-brand-pink aspect-[3/1]" />}>
+    <Suspense fallback={<Slider desktopColumns={5} mobileColumns={1.5} viewport="both">
+      {Array.from(Array(5).keys()).map(i => <div className="bg-white border p-2 h-full" key={i}>
+        <div className="w-full aspect-square relative mb-4" />
+        <div className="w-full h-5" />
+        <div className="w-full h-7 mb-1" />
+        <div className="w-full h-12" />
+        <div className="w-full h-5" />
+      </div>)}
+    </Slider>}>
       <Render />
     </Suspense>
   );
