@@ -96,9 +96,9 @@ export async function Navbar() {
         <div className="flex container mx-auto items-center px-4 lg:px-6">
           <div className="flex w-full md:w-1/4">
             <Link
-              href="/"
-              prefetch={true}
               className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6"
+              href="/"
+              title="Overstock"
             >
               <Logo className="text-white h-10 w-auto" />
             </Link>
@@ -112,6 +112,7 @@ export async function Navbar() {
             <Link
               className="flex h-11 w-11"
               href="https://www.overstock.com/account/login"
+              title="Account Login"
             >
               <svg
                 className="h-8 w-8 m-auto"

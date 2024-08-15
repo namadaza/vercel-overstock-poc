@@ -20,7 +20,7 @@ function ContentCards() {
           <div className="content-cards-header">
             <span className="cch--title">Notifications</span>
             <div className="cch--button_container flex gap-1">
-              <button id="refresh" className="cch-btn">
+              <button id="refresh" className="cch-btn" title="Refresh">
                 <svg
                   width="24"
                   height="24"
@@ -37,7 +37,7 @@ function ContentCards() {
                 </svg>
               </button>
 
-              <button id="close" className="cch-btn">
+              <button id="close" className="cch-btn" title="Close">
                 <svg
                   width="24"
                   height="24"
