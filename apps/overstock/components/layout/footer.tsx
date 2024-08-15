@@ -155,11 +155,10 @@ export default async function Footer() {
         })}
       </div>
             </div>
-            <div className="flex md:justify-end sm:justify-center m-8">
+            <div className="flex flex-wrap gap-2 md:justify-end sm:justify-center m-8 max-w-full scrollbar-none">
               {payment_options?.payment_options?.map((prop: FooterLinks) => {
                 return (
                   <div
-                    className="mr-2"
                     title={prop?.url?.title}
                     dangerouslySetInnerHTML={{ __html: prop.svg }}
                   />
