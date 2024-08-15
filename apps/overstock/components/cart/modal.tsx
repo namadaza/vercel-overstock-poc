@@ -51,7 +51,7 @@ export default function CartModal() {
 
   return (
     <>
-      <Link className="block" href="https://overstock.com/cart">
+      <Link className="block h-11 w-11" href="https://overstock.com/cart">
         <button aria-label="Open cart">
           <OpenCart quantity={cart?.totalQuantity} />
         </button>
