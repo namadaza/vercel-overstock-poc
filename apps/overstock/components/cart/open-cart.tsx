@@ -14,7 +14,7 @@ export default function OpenCart({
   quantity?: number;
 }) {
   return (
-    <div className="relative flex h-11 w-11 items-center justify-center text-white">
+    <div className="relative flex h-8 w-8 items-center justify-center text-white">
       <ShoppingBagIcon
         className={clsx('h-6 w-6', className)}
       />

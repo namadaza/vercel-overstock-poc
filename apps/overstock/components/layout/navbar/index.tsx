@@ -147,8 +147,8 @@ export async function Navbar() {
             </span>
             <Suspense
               fallback={
-                <div className="relative flex h-11 w-11 items-center justify-center text-white">
-                  <ShoppingBagIcon className="h-8 w-8" />
+                <div className="relative flex h-8 w-8 items-center justify-center text-white">
+                  <ShoppingBagIcon className="h-6 w-6" />
                 </div>
               }
             >
