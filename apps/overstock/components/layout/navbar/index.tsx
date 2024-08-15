@@ -92,9 +92,9 @@ export async function Navbar() {
           );
         })}
       </menu>
-      <nav className="bg-brand-red text-white flex flex-col items-center justify-between py-4 pb-0 sticky z-40 top-0">
+      <nav className="bg-brand-red border-b-white border-b-[1px] text-white flex flex-col items-center justify-between py-4 md:pb-0 sticky z-40 top-0">
         <div className="flex container mx-auto items-center px-4 lg:px-6">
-          <div className="flex w-full md:w-1/4">
+          <div className="flex w-1/2 md:w-1/4">
             <Link
               className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6"
               href="/"
@@ -108,14 +108,14 @@ export async function Navbar() {
               <Search />
             </Suspense>
           </div>
-          <div className="flex justify-end gap-2 md:w-1/4">
+          <div className="flex justify-end gap-2 w-1/2 md:w-1/4">
             <Link
-              className="flex h-11 w-11"
+              className="flex h-8 w-8"
               href="https://www.overstock.com/account/login"
               title="Account Login"
             >
               <svg
-                className="h-8 w-8 m-auto"
+                className="h-6 w-6 m-auto"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -127,9 +127,9 @@ export async function Navbar() {
                 <path d="M12 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.429a3.571 3.571 0 1 0 0 7.142 3.571 3.571 0 0 0 0-7.142zm0 10c2.558 0 5.114.471 7.664 1.411A3.571 3.571 0 0 1 22 18.19v3.096c0 .394-.32.714-.714.714H2.714A.714.714 0 0 1 2 21.286V18.19c0-1.495.933-2.833 2.336-3.35 2.55-.94 5.106-1.411 7.664-1.411zm0 1.428c-2.387 0-4.775.44-7.17 1.324a2.143 2.143 0 0 0-1.401 2.01v2.38H20.57v-2.38c0-.898-.56-1.7-1.401-2.01-2.395-.885-4.783-1.324-7.17-1.324z"></path>
               </svg>
             </Link>
-            <span className="head-slot-bell h-11 w-11 flex">
+            <span className="head-slot-bell h-8 w-8 flex">
               <svg
-                className="text-white h-8 w-8 m-auto"
+                className="text-white h-6 w-6 m-auto"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -147,14 +147,14 @@ export async function Navbar() {
             </span>
             <Suspense
               fallback={
-                <div className="relative flex h-11 w-11 items-center justify-center text-white">
-                  <ShoppingBagIcon className="h-8 w-8" />
+                <div className="relative flex h-8 w-8 items-center justify-center text-white">
+                  <ShoppingBagIcon className="h-6 w-6" />
                 </div>
               }
             >
               <RenderCart />
             </Suspense>
-            <div className="block flex-none md:hidden pl-4">
+            <div className="flex items-center md:hidden pl-4">
               <Suspense fallback={null}>
                 <MobileMenu topNav={topNav} />
               </Suspense>
