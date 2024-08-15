@@ -41,7 +41,7 @@ export default function MobileMenu({ topNav }: { topNav: HeaderTopNav; }) {
       <button
         onClick={toggleMenu}
         aria-label="Open mobile menu"
-        className="flex h-11 w-11 items-center justify-center md:hidden text-white"
+        className="h-8 w-8 md:hidden text-white"
       >
         {isOpen ? <XMarkIcon className="h-6" /> : <Bars3Icon className="h-8" />}
       </button>
