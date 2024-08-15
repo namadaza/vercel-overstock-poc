@@ -110,7 +110,7 @@ export default async function Footer() {
               <FooterCompanyLinks company_information={company_information} let_us_help={let_us_help} my_account={my_account} />
              </div>
             <div className="flex md:justify-end sm:justify-center m-8">
-              {payment_options?.payment_options?.map((prop: FooterLinks) => {
+              {payment_options?.payment_options?.map((prop: FooterLinks, index: number) => {
                 return (
                   <div
                   dangerouslySetInnerHTML={{ __html: prop.svg }}
