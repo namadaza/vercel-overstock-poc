@@ -45,7 +45,6 @@ function Section({ index, section }: { index: number; section: any }) {
                     priority={index === 0}
                     src={card.image.url}
                     width={card.image.dimension.width}
-                    unoptimized
                   />
                 )}
               </Link>
