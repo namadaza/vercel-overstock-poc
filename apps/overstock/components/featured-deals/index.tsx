@@ -43,7 +43,6 @@ async function Render() {
                   height={640}
                   src={product.images[0]!.url}
                   width={640}
-                  unoptimized
                 />
                 {product.images.length > 1 && (
                   <Image
@@ -52,7 +51,6 @@ async function Render() {
                     height={640}
                     src={product.images[1]!.url}
                     width={640}
-                    unoptimized
                   />
                 )}
               </div>
