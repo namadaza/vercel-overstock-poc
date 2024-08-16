@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getCart } from "./actions";
 
@@ -29,7 +30,7 @@ function Cart() {
   }, []);
 
   return (
-    <div className="relative flex h-11 w-11 items-center justify-center text-white">
+    <Link className="relative flex h-11 w-11 items-center justify-center text-white" href="https://overstock.com/cart">
       <ShoppingBagIcon className="h-8 w-8" />
 
       {(cart?.lines ?? []).length > 0 ? (
@@ -37,7 +38,7 @@ function Cart() {
           {cart.lines.length}
         </div>
       ) : null}
-    </div>
+    </Link>
   );
 }
 
