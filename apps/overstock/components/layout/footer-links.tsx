@@ -25,7 +25,7 @@ function FooterCompanyLinks({
           className='flex justify-between cursor-pointer md:cursor-default uppercase mb-6 font-bold text-lg'
         >
           {my_account?.title}
-          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="presentation" className={`${showAccount ? '-scale-y-100' : ''} icon md:hidden`}><path d="M20 8.5 12.5 16 5 8.5" stroke="currentColor" stroke-width="1.5" fill="none"></path></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="presentation" className={`${showAccount ? '-scale-y-100' : ''} icon md:hidden`}><path d="M20 8.5 12.5 16 5 8.5" stroke="currentColor" strokeWidth="1.5" fill="none"></path></svg>
         </h2>
         <div
           className={`${showAccount ? 'block' : 'hidden'} md:block`}
@@ -49,7 +49,7 @@ function FooterCompanyLinks({
           className='flex justify-between cursor-pointer md:cursor-default uppercase mb-6 font-bold text-lg'
         >
           {let_us_help?.title}
-          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="presentation" className={`${showLetUsHelp ? '-scale-y-100' : ''} icon md:hidden`}><path d="M20 8.5 12.5 16 5 8.5" stroke="currentColor" stroke-width="1.5" fill="none"></path></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="presentation" className={`${showLetUsHelp ? '-scale-y-100' : ''} icon md:hidden`}><path d="M20 8.5 12.5 16 5 8.5" stroke="currentColor" strokeWidth="1.5" fill="none"></path></svg>
         </h2>
         <div
           className={`${showLetUsHelp ? 'block' : 'hidden'} md:block`}
@@ -73,7 +73,7 @@ function FooterCompanyLinks({
           className='flex justify-between cursor-pointer md:cursor-default uppercase mb-6 font-bold text-lg'
         >
           {company_information?.title}
-          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="presentation" className={`${showCompanyLinks ? '-scale-y-100' : ''} icon md:hidden`}><path d="M20 8.5 12.5 16 5 8.5" stroke="currentColor" stroke-width="1.5" fill="none"></path></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="presentation" className={`${showCompanyLinks ? '-scale-y-100' : ''} icon md:hidden`}><path d="M20 8.5 12.5 16 5 8.5" stroke="currentColor" strokeWidth="1.5" fill="none"></path></svg>
         </h2>
         <div
           className={`${showCompanyLinks ? 'block' : 'hidden'} md:block`}

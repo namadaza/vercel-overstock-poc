@@ -19,10 +19,10 @@ export default function DesktopMenu({ topNav }: { topNav: HeaderTopNav; }) {
   useEffect(() => {
     if (menuIsOpen) {
       document.body.classList.add('overflow-y-hidden');
-      document.body.classList.add('pr-4');
+      // document.body.classList.add('pr-4');
     } else {
       document.body.classList.remove('overflow-y-hidden');
-      document.body.classList.remove('pr-4');
+      // document.body.classList.remove('pr-4');
     }
   }, [menu]);
 
@@ -55,9 +55,8 @@ export default function DesktopMenu({ topNav }: { topNav: HeaderTopNav; }) {
                             </Link>
                             <ul className="flex flex-col">
                               {l2?.level_three?.map(l3 => {
-                                return <li>
+                                return <li key={l3.link.title}>
                                   <Link
-                                    key={l3.link.title}
                                     href={l3.link.href}
                                     className="py-1 text-sm text-brand-grey hover:text-brand-red"
                                     tabIndex={-1}>

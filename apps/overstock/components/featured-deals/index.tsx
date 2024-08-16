@@ -56,7 +56,7 @@ async function Render() {
               </div>
             )}
             <ul>
-              {Object.keys(referencePricing).length > 0 && (
+              {Object.keys(referencePricing).length > 0 && !!referencePricing?.MSRP && (
                 <li className="text-sm font-bold">
                   <span className="border-b border-black border-dashed line-through">
                     {Number(referencePricing.MSRP.price).toLocaleString(
