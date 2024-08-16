@@ -10,6 +10,7 @@ export async function getCart() {
 
   if (value) {
     const cart = await shopifyFetch<ShopifyCartOperation>({
+      cache: 'no-store',
       query: getCartQuery,
       variables: { cartId: `gid://shopify/Cart/${value}` },
     });
