@@ -19,7 +19,7 @@ function ShoppingBagIcon({ className }: { className: string }) {
   );
 }
 
-function NewCart() {
+function Cart() {
   const [cart, setCart] = useState<any>();
 
   useEffect(() => {
@@ -30,9 +30,7 @@ function NewCart() {
 
   return (
     <div className="relative flex h-11 w-11 items-center justify-center text-white">
-      <ShoppingBagIcon
-        className="h-8 w-8"
-      />
+      <ShoppingBagIcon className="h-8 w-8" />
 
       {(cart?.lines ?? []).length > 0 ? (
         <div className="absolute right-0 top-0 h-5 w-5 rounded-full border border-brand-red bg-white text-brand-red text-center text-[11px]/5">
@@ -43,4 +41,4 @@ function NewCart() {
   );
 }
 
-export default NewCart;
+export default Cart;

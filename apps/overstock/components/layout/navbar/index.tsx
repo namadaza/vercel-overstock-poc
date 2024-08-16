@@ -1,5 +1,5 @@
+import Cart from "components/cart";
 import Logo from "components/logo";
-import NewCart from "components/new-cart";
 import { getHeaderTopNav } from "lib/contentstack";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -114,7 +114,7 @@ export async function Navbar() {
               </svg>
               <span id="badge" />
             </span>
-            <NewCart />
+            <Cart />
             <div className="flex items-center md:hidden pl-4">
               <Suspense fallback={null}>
                 <MobileMenu topNav={topNav} />
