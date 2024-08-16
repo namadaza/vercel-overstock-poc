@@ -48,7 +48,8 @@ export default function MobileSubmenu({ levelOne, closeMenu }: { levelOne: Level
                     key={l3Title}
                     href={l3Href}
                     className="py-1 text-sm text-brand-grey hover:text-brand-red"
-                    tabIndex={-1}>
+                    tabIndex={-1}
+                  >
                     {l3Title}
                   </Link>
                 ))}
