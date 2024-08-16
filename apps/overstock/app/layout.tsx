@@ -1,12 +1,10 @@
-import { FlagValues } from '@vercel/flags/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import AppScripts from "components/app-scripts";
 import ContentCards from "components/content-cards";
 import Footer from "components/layout/footer";
 import { Navbar } from "components/layout/navbar";
-import NewCart from 'components/new-cart';
 import LivePreviewInitComponent from "lib/contentstack/livePreviewInit";
-import { type ReactNode, Suspense } from "react";
+import { type ReactNode } from "react";
 import "./globals.css";
 
 const { SITE_NAME } = process.env;
@@ -26,10 +24,6 @@ export const metadata = {
   },
 };
 
-function RenderFlags() {
-  return <FlagValues values={{}} />
-}
-
 export default async function RootLayout({
   children,
 }: {
@@ -45,16 +39,12 @@ export default async function RootLayout({
       </head>
       <body className="bg-white text-black antialiased">
         <LivePreviewInitComponent />
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
         <AppScripts />
         <ContentCards />
         <SpeedInsights />
-        <NewCart />
-        <Suspense>
-          <RenderFlags />
-        </Suspense>
       </body>
     </html>
   );
