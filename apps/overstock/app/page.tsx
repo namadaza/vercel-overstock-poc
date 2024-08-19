@@ -1,26 +1,39 @@
 import Section from "components/section";
-import type { LivePreviewQuery } from "contentstack";
 import { getHomePage } from "lib/contentstack";
+import type { Metadata } from "next";
 
-export const metadata = {
-  description:
-    "Crazy-Good Deals",
-  openGraph: {
-    type: "website",
-  },
-};
+export async function generateMetadata() {
+  const { seo } = await getHomePage();
 
-export default async function HomePage({
-  searchParams,
-}: {
-  searchParams: LivePreviewQuery | undefined;
-}) {
-  const homePage = await getHomePage()
+  if (!seo) {
+    return {};
+  }
 
-  return <div className="grid grid-cols-1 gap-y-12 py-12">
-  {homePage.sections.map(({ section }: any, index: number) => {
+  const metadata: Metadata = {
+    description: seo.meta_description,
+    robots: {
+      index: !!seo.enable_search_indexing,
+    },
+    title: seo.meta_title,
+  };
 
-    return <Section key={section._metadata.uid} index={index} section={section} />
-  })}
-  </div>
+  return metadata;
+}
+
+export default async function HomePage() {
+  const homePage = await getHomePage();
+
+  return (
+    <div className="grid grid-cols-1 gap-y-12 py-12">
+      {homePage.sections.map(({ section }: any, index: number) => {
+        return (
+          <Section
+            key={section._metadata.uid}
+            index={index}
+            section={section}
+          />
+        );
+      })}
+    </div>
+  );
 }
