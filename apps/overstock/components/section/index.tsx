@@ -1,8 +1,8 @@
 import Category, { type CategoryType } from "components/category";
 import FeaturedDeals from "components/featured-deals";
 import Slider from "components/slider";
-import Image from "next/image";
 import Link from "next/link";
+import SectionImage from "./image";
 
 function Section({ index, section }: { index: number; section: any }) {
   const viewport = section.viewport ?? "both";
@@ -38,15 +38,7 @@ function Section({ index, section }: { index: number; section: any }) {
                 key={card._metadata.uid}
               >
                 {!!card.image && (
-                  <Image
-                    alt="Hello World"
-                    className="bg-brand-red block w-full h-auto"
-                    height={card.image.dimension.height}
-                    priority={index === 0}
-                    loading={index === 0 || 1 ? "eager" : 'lazy'}
-                    src={card.image.url}
-                    width={card.image.dimension.width}
-                  />
+                  <SectionImage image={card.image} sectionIndex={index} />
                 )}
               </Link>
             );
