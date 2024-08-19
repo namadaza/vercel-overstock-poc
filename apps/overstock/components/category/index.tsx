@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from "next/link";
-import ArrowRightCircleIcon from "./icons/arrow-right-circle";
+import ArrowRightCircleIcon from "../icons/arrow-right-circle";
 
 type Dimension = {
     height: number;
