@@ -18,6 +18,9 @@ export const metadata = {
     default: SITE_NAME!,
     template: `%s | ${SITE_NAME}`,
   },
+  icons: {
+    icon: "./favicon.svg",
+  },
   robots: {
     follow: true,
     index: true,
