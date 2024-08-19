@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import Link from "next/link";
 import ArrowRightCircleIcon from "../icons/arrow-right-circle";
+import CategoryImage from './image';
 
 type Dimension = {
     height: number;
@@ -53,13 +53,7 @@ const Category = ({ category }: { category: CategoryType }) => {
   return (
     <Link className="flex flex-col items-center text-center justify-start h-full" href={category.url}>
         <div className={`rounded-full w-full aspect-square overflow-hidden`}>
-            <Image 
-                alt={category.title} 
-                className="w-full h-full object-cover" 
-                height={category.image.dimension.height} 
-                width={category.image.dimension.width} 
-                src={category.image?.url} 
-            />
+            <CategoryImage alt={category.title} image={category.image} />
         </div>
         <div className="mt-4 pb-2 font-bold">
             {category.title}
