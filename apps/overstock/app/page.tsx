@@ -3,14 +3,18 @@ import { getHomePage } from "lib/contentstack";
 import type { Metadata } from "next";
 
 export async function generateMetadata() {
-  const homePage = await getHomePage();
+  const { seo } = await getHomePage();
+
+  if (!seo) {
+    return {};
+  }
 
   const metadata: Metadata = {
-    description: homePage.seo?.meta_description,
+    description: seo.meta_description,
     robots: {
-      index: !!homePage.seo?.enable_search_indexing,
+      index: !!seo.enable_search_indexing,
     },
-    title: homePage.seo?.meta_title,
+    title: seo.meta_title,
   };
 
   return metadata;
