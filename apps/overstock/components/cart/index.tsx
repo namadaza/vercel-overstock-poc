@@ -30,8 +30,11 @@ function Cart() {
   }, []);
 
   return (
-    <Link className="relative flex h-11 w-11 items-center justify-center text-white" href="https://overstock.com/cart">
-      <ShoppingBagIcon className="h-8 w-8" />
+    <Link
+      className="relative flex h-11 w-11 items-center justify-center text-white"
+      href="https://overstock.com/cart"
+    >
+      <ShoppingBagIcon className=" h-6 w-6 md:h-8 md:w-8" />
 
       {(cart?.lines ?? []).length > 0 ? (
         <div className="absolute right-0 top-0 h-5 w-5 rounded-full border border-brand-red bg-white text-brand-red text-center text-[11px]/5">
