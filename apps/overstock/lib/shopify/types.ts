@@ -84,7 +84,7 @@ export type ProductVariant = {
   title: string;
   availableForSale: boolean;
   isOnSale?: {
-    value: boolean
+    value: string
   }
   referencePricing?: {
     value: string

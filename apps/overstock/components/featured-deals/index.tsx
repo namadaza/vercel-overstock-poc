@@ -35,6 +35,7 @@ async function Render() {
             )
           : [];
         const id = product.handle.split("-").pop();
+        const isOnSale = product.variants[0]?.isOnSale?.value === 'true'
         const referencePricing = JSON.parse(
           product.variants[0]?.referencePricing?.value ?? "{}"
         );
@@ -72,10 +73,21 @@ async function Render() {
                 )}
               </div>
             )}
-            <ul>
+            <ul className="w-full">
+              <li className="text-lg font-bold text-brand-red">
+                {Number(product.variants[0]?.price.amount).toLocaleString(
+                  "en-US",
+                  {
+                    currency: "USD",
+                    maximumFractionDigits: 2,
+                    minimumFractionDigits: 2,
+                    style: "currency",
+                  }
+                )}
+              </li>
               {Object.keys(referencePricing).length > 0 &&
                 !!referencePricing?.MSRP && (
-                  <li className="text-sm font-bold">
+                  <li className="text-sm font-bold pb-1">
                     <span className="border-b border-black border-dashed line-through">
                       {Number(referencePricing.MSRP.price).toLocaleString(
                         "en-US",
@@ -90,17 +102,8 @@ async function Render() {
                     {referencePricing.MSRP.sellingPercentageOff}% Off MSRP
                   </li>
                 )}
-              <li className="mb-1 text-lg font-bold">
-                {Number(product.variants[0]?.price.amount).toLocaleString(
-                  "en-US",
-                  {
-                    currency: "USD",
-                    maximumFractionDigits: 2,
-                    minimumFractionDigits: 2,
-                    style: "currency",
-                  }
-                )}
-              </li>
+              <li className="pb-1">
+                <span className="h-6 inline-block rounded-full bg-brand-red text-white font-bold text-xs/6 px-2">Sale</span></li>
               <li className="line-clamp-2">{product.title}</li>
               <li
                 className="w-full h-[25px]"
