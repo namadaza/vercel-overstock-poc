@@ -84,7 +84,7 @@ export type ProductVariant = {
   title: string;
   availableForSale: boolean;
   isOnSale?: {
-    value: boolean
+    value: string
   }
   referencePricing?: {
     value: string
@@ -128,6 +128,9 @@ export type ShopifyProduct = {
   title: string;
   description: string;
   descriptionHtml: string;
+  featuredTimes?: {
+    value: string
+  }
   options: ProductOption[];
   priceRange: {
     maxVariantPrice: Money;

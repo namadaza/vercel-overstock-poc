@@ -12,7 +12,7 @@ async function Render() {
     cookies().get("vercel-flag-overrides")?.value ?? "{}"
   )) as { featuredDeals?: string };
   const date = new Date(
-    new Date().toLocaleString("en", { timeZone: "America/Los_Angeles" })
+    new Date().toLocaleString("en", { timeZone: "US/Mountain" })
   );
   const tag = `featured-${overrides?.featuredDeals ?? date.toISOString().split("T")[0]}`;
 
@@ -23,10 +23,28 @@ async function Render() {
   return (
     <Slider desktopColumns={5} mobileColumns={1.5} viewport="both">
       {products.map((product) => {
+        const featuredTimes = product.featuredTimes?.value
+          ? (JSON.parse(product.featuredTimes.value) as string[]).map(
+              (value) =>
+                new Date(
+                  new Date(value).toLocaleString("en", {
+                    // TODO: Hrm
+                    timeZone: "US/Pacific",
+                  })
+                )
+            )
+          : [];
         const id = product.handle.split("-").pop();
+        const isOnSale = product.variants[0]?.isOnSale?.value === 'true'
         const referencePricing = JSON.parse(
           product.variants[0]?.referencePricing?.value ?? "{}"
         );
+
+        if (featuredTimes.length === 2) {
+          if ((date < featuredTimes[0]!) || (date > featuredTimes[1]!)) {
+            return null
+          }
+        }
 
         return (
           <Link
@@ -55,24 +73,8 @@ async function Render() {
                 )}
               </div>
             )}
-            <ul>
-              {Object.keys(referencePricing).length > 0 && !!referencePricing?.MSRP && (
-                <li className="text-sm font-bold">
-                  <span className="border-b border-black border-dashed line-through">
-                    {Number(referencePricing.MSRP.price).toLocaleString(
-                      "en-US",
-                      {
-                        currency: "USD",
-                        maximumFractionDigits: 2,
-                        minimumFractionDigits: 2,
-                        style: "currency",
-                      }
-                    )}
-                  </span>{" "}
-                  {referencePricing.MSRP.sellingPercentageOff}% Off MSRP
-                </li>
-              )}
-              <li className="mb-1 text-lg font-bold">
+            <ul className="w-full">
+              <li className="text-lg font-bold text-brand-red">
                 {Number(product.variants[0]?.price.amount).toLocaleString(
                   "en-US",
                   {
@@ -83,13 +85,33 @@ async function Render() {
                   }
                 )}
               </li>
+              {Object.keys(referencePricing).length > 0 &&
+                !!referencePricing?.MSRP && (
+                  <li className="text-sm font-bold pb-1">
+                    <span className="border-b border-black border-dashed line-through">
+                      {Number(referencePricing.MSRP.price).toLocaleString(
+                        "en-US",
+                        {
+                          currency: "USD",
+                          maximumFractionDigits: 2,
+                          minimumFractionDigits: 2,
+                          style: "currency",
+                        }
+                      )}
+                    </span>{" "}
+                    {referencePricing.MSRP.sellingPercentageOff}% Off MSRP
+                  </li>
+                )}
+              <li className="pb-1">
+                <span className="h-6 inline-block rounded-full bg-brand-red text-white font-bold text-xs/6 px-2">Sale</span></li>
               <li className="line-clamp-2">{product.title}</li>
               <li
                 className="w-full h-[25px]"
                 id={`pr-reviewsnippet-${id}`}
                 data-product-id={id}
               ></li>
-              <Script id={`card-${product.id}-reviews`} strategy="lazyOnload">{`
+            </ul>
+            <Script id={`card-${product.id}-reviews`} strategy="lazyOnload">{`
                 function loadReviews() {
                   window.pwr = window.pwr || function () {
                     (pwr.q = pwr.q || []).push(arguments);
@@ -135,7 +157,6 @@ async function Render() {
                 
                 new Promise((r) => setTimeout(r, 5000)).then(() => {});
               `}</Script>
-            </ul>
           </Link>
         );
       })}
@@ -145,15 +166,21 @@ async function Render() {
 
 function FeaturedDeals() {
   return (
-    <Suspense fallback={<Slider desktopColumns={5} mobileColumns={1.5} viewport="both">
-      {Array.from(Array(5).keys()).map(i => <div className="bg-white border p-2 h-full" key={i}>
-        <div className="w-full aspect-square relative mb-4" />
-        <div className="w-full h-5" />
-        <div className="w-full h-7 mb-1" />
-        <div className="w-full h-12" />
-        <div className="w-full h-5" />
-      </div>)}
-    </Slider>}>
+    <Suspense
+      fallback={
+        <Slider desktopColumns={5} mobileColumns={1.5} viewport="both">
+          {Array.from(Array(5).keys()).map((i) => (
+            <div className="bg-white border p-2 h-full" key={i}>
+              <div className="w-full aspect-square relative mb-4" />
+              <div className="w-full h-5" />
+              <div className="w-full h-7 mb-1" />
+              <div className="w-full h-12" />
+              <div className="w-full h-5" />
+            </div>
+          ))}
+        </Slider>
+      }
+    >
       <Render />
     </Suspense>
   );
