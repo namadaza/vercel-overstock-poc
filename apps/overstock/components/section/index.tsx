@@ -2,6 +2,7 @@ import Category, { type CategoryType } from "components/category";
 import FeaturedDeals from "components/featured-deals";
 import Slider from "components/slider";
 import Link from "next/link";
+import SvgOverlay from "../svg-overlay";
 import SectionImage from "./image";
 
 function Section({ index, section }: { index: number; section: any }) {
@@ -33,12 +34,18 @@ function Section({ index, section }: { index: number; section: any }) {
           {(section.cards ?? []).map(({ card }: { card: any }) => {
             return (
               <Link
-                className="md:flex-1"
+                className="md:flex-1 relative"
                 href={card.url}
                 key={card._metadata.uid}
               >
                 {!!card.image && (
                   <SectionImage image={card.image} sectionIndex={index} />
+                )}
+                {!!card.svg && (
+                  <SvgOverlay 
+                     sectionIndex={index}  
+                     svg={card.svg}
+                  />
                 )}
               </Link>
             );
