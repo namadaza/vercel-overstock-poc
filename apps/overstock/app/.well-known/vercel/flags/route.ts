@@ -17,11 +17,6 @@ export async function GET() {
       featuredDeals: {
         description: "The date of the featured deals to display.",
         options: [
-        // TODO: Remove
-          {
-            label: "2024-08-09",
-            value: "2024-08-09",
-          },
           ...Array.from(Array(30).keys()).map((i) => {
             const value = addDays(date, i).toISOString().split("T")[0];
 
