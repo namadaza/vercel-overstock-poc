@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
   if (!tags) {
     return new Response("Unprocessable Entity", { status: 422 });
   }
-
+  await new Promise((r) => setTimeout(r, 5000));
   // Send the request for revalidation
   tags.split(",").forEach((tag) => {
     revalidateTag(tag);
@@ -27,12 +27,12 @@ export async function POST(request: NextRequest) {
   if (!tags) {
     return new Response("Unprocessable Entity", { status: 422 });
   }
-
+  await new Promise((r) => setTimeout(r, 5000));
   // Send the request for revalidation
   tags.split(",").forEach((tag) => {
     revalidateTag(tag);
   });
-  await new Promise((r) => setTimeout(r, 5000));
+
   // Return the response
   return Response.json({ now: Date.now(), revalidated: true });
 }
