@@ -73,7 +73,7 @@ export async function Navbar() {
             </Link>
           </div>
           <div className="hidden justify-center md:flex md:w-1/2">
-            <Suspense fallback={<SearchSkeleton />}>
+                        <Suspense fallback={<SearchSkeleton />}>
               <Search />
             </Suspense>
           </div>
