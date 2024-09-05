@@ -1,5 +1,5 @@
 {
-  "name": "overstock",
+  "name": "zulily",
   "private": true,
   "engines": {
     "node": ">=20",
@@ -19,6 +19,7 @@
     "@playwright/test": "1.45.3",
     "@vercel/flags": "2.6.0",
     "@vercel/speed-insights": "1.0.12",
+    "@vercel-beyond-monorepo/ui": "workspace:*",
     "clsx": "2.1.1",
     "contentstack": "3.20.3",
     "next": "15.0.0-canary.120",
@@ -27,8 +28,8 @@
     "react-dom": "19.0.0-rc-49496d49-20240814"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@vercel-beyond-monorepo/eslint-config": "workspace:*",
+    "@vercel-beyond-monorepo/typescript-config": "workspace:*",
     "@tailwindcss/container-queries": "0.1.1",
     "@types/node": "22.4.1",
     "@types/react": "18.3.3",

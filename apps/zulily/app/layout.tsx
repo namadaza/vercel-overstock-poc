@@ -6,7 +6,7 @@ import { Navbar } from "components/layout/navbar";
 import LivePreviewInitComponent from "lib/contentstack/livePreviewInit";
 import { type ReactNode } from "react";
 import "./globals.css";
-
+import "@vercel-beyond-monorepo/ui/styles.css";
 const { SITE_NAME } = process.env;
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
