@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import Price from "@vercel-beyond-monorepo/price";
+import Price from "@vercel-beyond-monorepo/ui/price";
 
 const Label = ({
   title,
