@@ -1,5 +1,5 @@
 {
-  "name": "vercel-overstock-monorepo",
+  "name": "vercel-beyond-monorepo",
   "private": true,
   "scripts": {
     "build": "turbo build",
