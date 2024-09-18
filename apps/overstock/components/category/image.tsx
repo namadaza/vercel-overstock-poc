@@ -9,7 +9,7 @@ function CategoryImage({ alt, image }: { alt: string; image: any }) {
       className="w-full h-full object-cover"
       height={image.dimension.height}
       loader={({ src }) => {
-        return `${src}?auto=webp`;
+        return `${src}?auto=webp&width=1280`;
       }}
       src={image.url}
       width={image.dimension.width}
