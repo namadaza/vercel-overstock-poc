@@ -16,7 +16,7 @@ function SectionImage({
       height={image.dimension.height}
       priority={sectionIndex === 0}
       loader={({ src }) => {
-        return `${src}?auto=webp`;
+        return `${src}?auto=webp&width=1280`;
       }}
       loading={[0, 1].includes(sectionIndex) ? "eager" : "lazy"}
       src={image.url}
