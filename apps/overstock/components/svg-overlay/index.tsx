@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 
-
 const SvgOverlay = ({sectionIndex, svg}: {sectionIndex: number, svg: any}) => {
 
   return (

@@ -5,7 +5,7 @@ import Link from "next/link";
 import SvgOverlay from "../svg-overlay";
 import SectionImage from "./image";
 
-function Section({ index, section }: { index: number; section: any }) {
+function Section({ featuredDealsIndex = -1, index, section }: { featuredDealsIndex?: number; index: number; section: any }) {
   const viewport = section.viewport ?? "both";
   const isDesktop = ["both", "desktop"].includes(viewport);
   const isMobile = ["both", "mobile"].includes(viewport);
@@ -39,7 +39,7 @@ function Section({ index, section }: { index: number; section: any }) {
                 key={card._metadata.uid}
               >
                 {!!card.image && (
-                  <SectionImage image={card.image} sectionIndex={index} />
+                  <SectionImage image={card.image} featuredDealsIndex={featuredDealsIndex} sectionIndex={index} />
                 )}
                 {!!card.svg && (
                   <SvgOverlay 

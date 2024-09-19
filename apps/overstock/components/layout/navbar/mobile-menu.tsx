@@ -1,16 +1,15 @@
 'use client';
 
 import { Transition } from '@headlessui/react';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { HeaderTopNav } from 'lib/contentstack/types';
+import type { LevelOne } from 'lib/contentstack/types';
 import MobileSubmenu from './mobile-submenu';
 
-export default function MobileMenu({ topNav }: { topNav: HeaderTopNav; }) {
+export default function MobileMenu({ levelOne }: { levelOne: LevelOne[]; }) {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
   const [subMenu, setSubMenu] = useState('');
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -34,7 +33,7 @@ export default function MobileMenu({ topNav }: { topNav: HeaderTopNav; }) {
 
   useEffect(() => {
     setIsOpen(false);
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   return (
     <>
@@ -47,7 +46,7 @@ export default function MobileMenu({ topNav }: { topNav: HeaderTopNav; }) {
       </button>
       <Transition show={isOpen}>
         <div className="absolute top-[100%] left-0 w-lvw flex flex-col bg-brand-red border-t-[1px] border-t-white/20 px-4 pb-6 overflow-scroll h-lvh">
-          {topNav?.level_one?.length && topNav?.level_one.map(l1 => (
+          {levelOne.length && levelOne.map(l1 => (
             <div
               key={l1.link.title}
               className="flex border-b-[1px] border-b-white/20 h-auto w-auto"

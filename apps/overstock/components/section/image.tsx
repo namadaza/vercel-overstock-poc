@@ -3,9 +3,11 @@
 import Image from "next/image";
 
 function SectionImage({
+  featuredDealsIndex,
   image,
   sectionIndex,
 }: {
+  featuredDealsIndex: number;
   image: any;
   sectionIndex: number;
 }) {
@@ -18,7 +20,7 @@ function SectionImage({
       loader={({ src }) => {
         return `${src}?auto=webp&width=1280`;
       }}
-      loading={sectionIndex === 0 ? "eager" : "lazy"}
+      loading={sectionIndex === 0 || (featuredDealsIndex > -1 && sectionIndex < featuredDealsIndex) ? "eager" : "lazy"}
       src={image.url}
       width={image.dimension.width}
     />

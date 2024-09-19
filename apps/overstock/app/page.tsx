@@ -22,6 +22,7 @@ export async function generateMetadata() {
 
 export default async function HomePage() {
   const homePage = await getHomePage();
+  const featuredDealsIndex = homePage.sections.findIndex(({ section }: any) => section.is_featured_deals)
 
   return (
     <div className="grid grid-cols-1 gap-y-12 py-12">
@@ -29,6 +30,7 @@ export default async function HomePage() {
         return (
           <Section
             key={section._metadata.uid}
+            featuredDealsIndex={featuredDealsIndex}
             index={index}
             section={section}
           />
