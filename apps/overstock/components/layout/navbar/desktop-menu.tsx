@@ -1,12 +1,12 @@
 'use client';
 
 import { Transition } from '@headlessui/react';
-import { HeaderTopNav } from 'lib/contentstack/types';
+import type { LevelOne } from 'lib/contentstack/types';
 import Link from 'next/link';
 import { Fragment, useEffect, useState } from 'react';
 
 // Add Top Nav Type
-export default function DesktopMenu({ topNav }: { topNav: HeaderTopNav; }) {
+export default function DesktopMenu({ levelOne }: { levelOne: LevelOne[] }) {
   const [menu, setMenu] = useState('');
   const openMenu = (name: string) => () => {
     setMenu(name);
@@ -30,7 +30,7 @@ export default function DesktopMenu({ topNav }: { topNav: HeaderTopNav; }) {
     <Fragment>
       <div className="px-2 pt-2 container hidden md:flex w-full" onMouseLeave={closeMenu}>
         <ul className="flex flex-wrap items-end">
-          {topNav?.level_one?.length && topNav?.level_one.map(l1 => {
+          {levelOne.length && levelOne.map(l1 => {
             return (
               <li
                 key={l1.link.title}

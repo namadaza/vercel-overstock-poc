@@ -43,7 +43,7 @@ const preNavItems = [
 ];
 
 export async function Navbar() {
-  const topNav = await getHeaderTopNav();
+  const { levelOne } = await getHeaderTopNav();
 
   return (
     <>
@@ -121,13 +121,13 @@ export async function Navbar() {
             <Cart />
             <div className="flex items-center md:hidden pl-4">
               <Suspense fallback={null}>
-                <MobileMenu topNav={topNav} />
+                <MobileMenu levelOne={levelOne} />
               </Suspense>
             </div>
           </div>
         </div>
         <Suspense fallback={null}>
-          <DesktopMenu topNav={topNav} />
+          <DesktopMenu levelOne={levelOne} />
         </Suspense>
       </nav>
     </>
