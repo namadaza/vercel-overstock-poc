@@ -73,8 +73,28 @@ export async function getHomePage(): Promise<any> {
       referenceFieldPath: undefined,
       jsonRtePath: undefined,
     }) as any
+
+    const data = homePage[0][0]
+
+    data.sections.forEach(({ section }: any, index: number) => {
+      (section.cards ?? []).forEach((card: any, cardIndex: number) => {
+        if (card.card.image) {
+          data.sections[index].section.cards[cardIndex].card.image = {
+            dimension: card.card.image.dimension,
+            url: card.card.image.url,
+          }
+        }
   
-    return homePage[0][0]
+        if (card.card.svg) {
+          data.sections[index].section.cards[cardIndex].card.svg = {
+            dimension: card.card.svg.dimension,
+            url: card.card.svg.url,
+          }
+        }
+      })
+    })
+  
+    return data
   }, ['home-page'], {
     revalidate: 60 * 60 * 24,
     tags: ['home-page'],
